@@ -68,13 +68,13 @@
          WHERE MEM_NICKNAME = #{memNickname}
     </select>
 
-    <!--인증번호 등록-->
-    <insert id="insertAuthCode">
-        INSERT INTO MEM_INFO (
-            AUTH_CODE
-        ) VALUES (
-            #{authCode}
-        )
+    <!--인증번호 조회-->
+    <insert id="searchAuthCode">
+        SELECT AUTH_CODE
+            , MEM_EMAIL
+            , FARMER_NAME
+          FROM MEM_INFO
+         WHERE AUTH_CODE
     </insert>
 
 

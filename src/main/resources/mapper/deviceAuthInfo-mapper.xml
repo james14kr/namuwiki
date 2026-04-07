@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.namuwiki.member.mapper.DeviceAuthInfoMapper">
+	<resultMap id="member" type="com.green.namuwiki.member.dto.DeviceAuthInfoDTO">
+        <id column="FARM_ID" property="farmId" />
+        <result column="AUTH_CODE" property="authCode" />
+        <result column="FARMER_NAME" property="farmerName" />
+        <result column="FARMER_TEL" property="farmerTel" />
+        <result column="IS_USED" property="isUsed" />
+        <result column="CREATE_TIME" property="createTime" />
+    </resultMap>
+
+    <!--인증번호 등록 쿼리-->
+    <insert id="insertAuthCode">
+        INSERT INTO DEVICE_AUTH (
+            AUTH_CODE
+            , FARMER_NAME
+            , FARMER_TEL
+        ) VALUES (
+            #{authCode}
+            , #{farmerName}
+            , #{farmerTel}
+        )
+    </insert>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -36,10 +36,7 @@ public class MemberService {
     return memberMapper.searchNickname(memNickname);
   }
 
-  // 인증번호 등록 기능 실행 메서드
-  public void insertAuthCode(String authCode){
-    memberMapper.insertAuthCode(authCode);
-  }
+
 
 
 }

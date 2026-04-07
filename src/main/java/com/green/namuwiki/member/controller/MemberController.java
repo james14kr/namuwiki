@@ -67,18 +67,7 @@ public class MemberController {
 //    }
 //  }
 
-  // 인증번호 등록 api
-  // url: (POST) localhost:8080/members/authCode
-  @PostMapping("/authCode")
-  public ResponseEntity<?> insertAuthCode(@RequestBody String authCode){
-    try {
-      memberService.insertAuthCode(authCode);
-      return ResponseEntity.status(HttpStatus.CREATED).build();
-    }catch (Exception e){
-      log.error("인증번호 api 등록 중 오류 발생", e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
-  }
+
 
 
 }

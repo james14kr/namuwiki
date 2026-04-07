@@ -17,7 +17,6 @@ public interface MemberMapper {
   // 닉네임 중복 조회 쿼리 실행
   String searchNickname(MemberDTO memNickname);
 
-  // 인증번호 등록 쿼리 실행
-  void insertAuthCode(String authCode);
+
 
 }
