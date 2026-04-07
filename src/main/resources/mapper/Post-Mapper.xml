@@ -17,17 +17,29 @@
     <select id="findAll" resultType="com.green.namuwiki.posts.dto.PostResponseDTO">
         SELECT id, title, content, created_at, updated_at
         FROM POSTS
-        ORDER BY created_at DESC
+        ORDER BY updated_at DESC
     </select>
 
     <!--상세보기에서 게시글 삭제 쿼리-->
     <delete id="deleteDetail">
         DELETE FROM
-            POSTS
+        POSTS
         WHERE
-            ID = #{id}
+        ID = #{id}
     </delete>
 
+    <!--상세보기에서 게시글 수정 쿼리-->
+    <update id="updatePost" parameterType="com.green.namuwiki.posts.dto.PostRequestDTO">
+        UPDATE
+        POSTS
+        SET
+        TITLE = #{title}
+        , CONTENT = #{content}
+        , UPDATED_AT = NOW()
+        WHERE
+        ID = #{id}
+
+    </update>
 
 
 </mapper>

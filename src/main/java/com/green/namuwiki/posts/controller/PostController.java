@@ -51,8 +51,21 @@ public class PostController {
     }
   }
 
-
-
+  // 상세보기 게시글 수정 api
+  // (put) localhost:8080/posts/3
+  @PutMapping("/{id}")
+  public ResponseEntity<?> updatePost(
+      @PathVariable("id") Long id
+      , @RequestBody PostRequestDTO postRequestDTO){
+    try {
+      postRequestDTO.setId(id);
+      postService.updatePost(postRequestDTO);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    } catch (Exception e){
+      log.error("상세보기 게시글 수정 중 오류", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 
 
 
