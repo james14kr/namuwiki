@@ -26,6 +26,14 @@
         )
     </insert>
 
+    <!--인증번호 검증 쿼리 : 있으면 1 => 검증 통과, 없으면 0 => 검증 실패-->
+    <select id="selectAuthCode" resultType="int">
+        SELECT COUNT(*)
+        FROM DEVICE_AUTH
+        WHERE AUTH_CODE = #{authCode}
+        AND IS_USED = "N"
+    </select>
+
 
 </mapper>
 

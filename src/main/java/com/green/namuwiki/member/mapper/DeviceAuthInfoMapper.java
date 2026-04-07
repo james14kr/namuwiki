@@ -8,4 +8,7 @@ public interface DeviceAuthInfoMapper {
 
   // 인증번호 등록 쿼리 실행
   void insertAuthCode(DeviceAuthInfoDTO deviceAuthInfoDTO);
+
+  // 인증번호 검증 쿼리 실행
+  int selectAuthCode(String authCode);
 }

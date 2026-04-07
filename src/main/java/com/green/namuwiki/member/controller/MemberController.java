@@ -22,7 +22,12 @@ public class MemberController {
     try {
       memberService.joinData(memberDTO);
       return ResponseEntity.status(HttpStatus.CREATED).build();
-    }catch (Exception e){
+    }
+    catch (IllegalArgumentException e){
+      // 인증번호를 잘못 입력했을 때 발생하는 오류
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+    catch (Exception e){
       log.error("회원가입 중 오류 발생", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
