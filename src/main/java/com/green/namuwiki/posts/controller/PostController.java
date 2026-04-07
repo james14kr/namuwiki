@@ -22,6 +22,7 @@ public class PostController {
 
   @PostMapping
   public ResponseEntity<Void> createPost(@RequestBody PostRequestDTO dto) {
+    System.out.println("게시글 등록 요청 dto: " + dto);
     postService.createPost(dto);
     return ResponseEntity.ok().build();
   }

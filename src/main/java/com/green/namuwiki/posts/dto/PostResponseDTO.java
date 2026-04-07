@@ -17,4 +17,6 @@ public class PostResponseDTO {
   private String content;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+  private String memEmail;
+  private String memNickname;
 }
