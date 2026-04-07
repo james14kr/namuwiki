@@ -13,8 +13,10 @@ public class DeviceAuthInfoService {
   private final AuthCodeUtil authCodeUtil;
 
   // 인증번호 생성 + 등록 기능 실행 메서드
-  public void insertAuthCode(DeviceAuthInfoDTO deviceAuthInfoDTO){
-    DeviceAuthInfoDTO authCode = authCodeUtil.
+  public String insertAuthCode(DeviceAuthInfoDTO deviceAuthInfoDTO){
+    String authCode = authCodeUtil.generateAuthCode();
+    deviceAuthInfoDTO.setAuthCode(authCode);
     deviceAuthInfoMapper.insertAuthCode(deviceAuthInfoDTO);
+    return authCode;
   }
 }

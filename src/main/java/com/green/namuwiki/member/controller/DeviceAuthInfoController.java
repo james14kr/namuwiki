@@ -2,6 +2,7 @@ package com.green.namuwiki.member.controller;
 
 import com.green.namuwiki.member.dto.DeviceAuthInfoDTO;
 import com.green.namuwiki.member.service.DeviceAuthInfoService;
+import com.green.namuwiki.util.AuthCodeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,14 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class DeviceAuthInfoController {
   private final DeviceAuthInfoService deviceAuthInfoService;
+  private final AuthCodeUtil authCodeUtil;
 
   // 인증번호 등록 api
-  // url: (POST) localhost:8080/members/authCode
+  // url: (POST) localhost:8080/authes/authCode
   @PostMapping("/authCode")
   public ResponseEntity<?> insertAuthCode(@RequestBody DeviceAuthInfoDTO deviceAuthInfoDTO){
     try {
+      String authCode = authCodeUtil.generateAuthCode();
       deviceAuthInfoService.insertAuthCode(deviceAuthInfoDTO);
-      return ResponseEntity.status(HttpStatus.CREATED).build();
+      return ResponseEntity.status(HttpStatus.CREATED).body(authCode);
     }catch (Exception e){
       log.error("인증번호 api 등록 중 오류 발생", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
