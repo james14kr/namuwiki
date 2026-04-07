@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.namuwiki.member.mapper.MemInfoMapper">
+
+
+
+    <!--마이페이지 정보 조회 쿼리-->
+    <select
+            id="myInfo"
+            parameterType="String"
+            resultType="com.green.namuwiki.member.dto.MemInfoDTO">
+        SELECT
+            MEM_EMAIL
+            , MEM_ROLE
+            , MEM_NICKNAME
+            , MEM_NAME
+            , MEM_TEL
+            , MEM_ADD
+            , MEM_JOIN_DATE
+            , MEM_PROFILE_IMG
+        FROM
+            MEM_INFO
+        WHERE
+            MEM_EMAIL = #{memEmail}
+
+    </select>
+
+    <!--마이페이지 사진 등록 쿼리-->
+<!--    <insert id="">-->
+<!--        INSERT INTO MEM_INFO (-->
+<!--            MEM_EMAIL-->
+<!--            , MEM_PROFILE_IMG-->
+<!--        ) VALUES(-->
+<!--            #{memEmail}-->
+<!--            #{memProfileImg}-->
+<!--        )-->
+<!--    </insert>-->
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

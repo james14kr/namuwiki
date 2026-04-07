@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.namuwiki.member.mapper.MemberMapper">
+	<resultMap id="member" type="com.green.namuwiki.member.dto.MemberDTO">
+        <id column="MEM_EMAIL" property="memEmail" />
+        <result column="MEM_PW" property="memPw" />
+        <result column="MEM_ROLE" property="memRole" />
+        <result column="MEM_NICKNAME" property="memNickname" />
+        <result column="MEM_NAME" property="memName" />
+        <result column="MEM_TEL" property="memTel" />
+        <result column="MEM_ADD" property="memAdd" />
+        <result column="ADD_DETAIL" property="addDetail" />
+        <result column="MEM_JOIN_DATE" property="memJoinDate" />
+        <result column="FARMER_NAME" property="farmerName" />
+        <result column="AUTH_CODE" property="authCode" />
+    </resultMap>
+
+    <!--회원가입 등록 쿼리-->
+    <insert id="joinData">
+        INSERT INTO MEM_INFO (
+            MEM_EMAIL
+            , MEM_PW
+            , MEM_ROLE
+            , MEM_NICKNAME
+            , MEM_NAME
+            , MEM_TEL
+            , MEM_ADD
+            , ADD_DETAIL
+            , FARMER_NAME
+            , AUTH_CODE
+        ) VALUES (
+            #{memEmail}
+            , #{memPw}
+            , #{memRole}
+            , #{memNickname}
+            , #{memName}
+            , #{memTel}
+            , #{memAdd}
+            , #{addDetail}
+            , #{farmerName}
+            , #{authCode}
+        )
+    </insert>
+
+    <!--AuthenticationManager 객체로 로그인 검증 시 필요한 로그인 정보를 조회-->
+    <select id="selectLoginInfo" resultMap="member">
+        SELECT MEM_EMAIL
+            , MEM_PW
+            , MEM_ROLE
+        FROM MEM_INFO
+        WHERE MEM_EMAIL = #{memEmail}
+    </select>
+
+    <!--이메일 중복 조회 , 아이디 찾기-->
+    <select id="searchEmail" resultType="string">
+        SELECT MEM_EMAIL
+          FROM MEM_INFO
+         WHERE MEM_EMAIL = #{memEmail}
+    </select>
+
+    <!--닉네임 중복 조회-->
+    <select id="searchNickname" resultType="string">
+        SELECT MEM_NICKNAME
+          FROM MEM_INFO
+         WHERE MEM_NICKNAME = #{memNickname}
+    </select>
+
+    <!--인증번호 등록-->
+    <insert id="insertAuthCode">
+        INSERT INTO MEM_INFO (
+            AUTH_CODE
+        ) VALUES (
+            #{authCode}
+        )
+    </insert>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.namuwiki.sessorActuator.mapper.SensorActuatorMapper">
+
+
+
+    <!--메인피드 목록 조회 쿼리-->
+    <select
+        id="sensorActuator"
+        resultType="com.green.namuwiki.sessorActuator.dto.SensorActuatorDTO">
+        SELECT
+            s.DEVICE_ID,
+            s.CREATE_DATE,
+            s.TEMP_C,
+            s.HUMIDITY,
+            s.SOIL_MOISTURE_VALUE,
+            s.LDR_VALUE,
+            s.FAN_STATUS,
+            s.LED_STATUS,
+            s.PUMP_STATUS,
+            t.CROPS,
+            t.TEMP_MIN,
+            t.TEMP_MAX,
+            t.SOIL_MIN,
+            t.SOIL_MAX,
+            t.LUX_MIN,
+            t.LUX_MAX
+        FROM
+            SENSOR_DATA s
+        LEFT JOIN
+            DEVICE_INFO d
+        ON
+            s.DEVICE_ID = d.DEVICE_ID
+        LEFT JOIN
+            DEVICE_ACTUATOR_STANDARD t
+        ON
+            d.CROPS = t.CROPS
+        WHERE
+            s.ID = (
+                SELECT MAX(ID) FROM SENSOR_DATA WHERE DEVICE_ID = s.DEVICE_ID
+            )
+        ORDER BY
+            s.CREATE_DATE DESC
+    </select>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
