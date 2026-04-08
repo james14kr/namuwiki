@@ -5,10 +5,9 @@ import com.green.namuwiki.farm.service.FarmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -22,6 +21,11 @@ public class FarmController {
   public ResponseEntity<?> registerFarm(@RequestBody FarmDTO dto){
     farmService.registerFarm(dto);
     return ResponseEntity.ok().build();
+  }
+
+  @GetMapping
+  public ResponseEntity<List<FarmDTO>> getFarmList(){
+    return ResponseEntity.ok(farmService.getFarmList());
   }
 
 }

@@ -9,6 +9,17 @@
         INSERT INTO FARM(FARMER_EMAIL, FARM_NAME, FARM_ADDR, FARM_DESC)
         VALUES(#{farmerEmail},#{farmName},#{farmAddr},#{farmDesc} )
     </insert>
+
+    <select id="selectFarmList" resultType="com.green.namuwiki.farm.dto.FarmDTO">
+        SELECT FARM_ID
+            ,FARMER_EMAIL
+            ,FARM_NAME
+            ,FARM_ADDR
+            ,FARM_DESC
+            ,CREATED_DATE
+        FROM FARM
+        ORDER BY CREATED_DATE DESC
+    </select>
 	
 </mapper>
 

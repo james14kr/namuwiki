@@ -5,6 +5,8 @@ import com.green.namuwiki.farm.mapper.FarmMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class FarmService {
@@ -15,4 +17,7 @@ public class FarmService {
     return farmMapper.insertFarm(dto);
   }
 
+  public List<FarmDTO> getFarmList() {
+    return farmMapper.selectFarmList();
+  }
 }
