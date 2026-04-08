@@ -7,8 +7,8 @@
 	<resultMap id="member" type="com.green.namuwiki.member.dto.DeviceAuthInfoDTO">
         <id column="FARM_ID" property="farmId" />
         <result column="AUTH_CODE" property="authCode" />
-        <result column="FARMER_NAME" property="farmerName" />
-        <result column="FARMER_TEL" property="farmerTel" />
+        <result column="MEM_NAME" property="memName" />
+        <result column="MEM_TEL" property="memTel" />
         <result column="IS_USED" property="isUsed" />
         <result column="CREATE_TIME" property="createTime" />
     </resultMap>
@@ -17,12 +17,12 @@
     <insert id="insertAuthCode">
         INSERT INTO DEVICE_AUTH (
             AUTH_CODE
-            , FARMER_NAME
-            , FARMER_TEL
+            , MEM_NAME
+            , MEM_TEL
         ) VALUES (
             #{authCode}
-            , #{farmerName}
-            , #{farmerTel}
+            , #{memName}
+            , #{memTel}
         )
     </insert>
 
@@ -32,6 +32,15 @@
         FROM DEVICE_AUTH
         WHERE AUTH_CODE = #{authCode}
         AND IS_USED = "N"
+    </select>
+
+    <!--인증번호 유효성 검사 시 일치여부 판단하는 쿼리 : 있으면 1, 없으면 0-->
+    <select id="compareFarmerData" resultType="int">
+        SELECT COUNT(*)
+        FROM DEVICE_AUTH
+        WHERE AUTH_CODE = #{authCode}
+        AND MEM_NAME = #{memName}
+        AND MEM_TEL = #{memTel}
     </select>
 
 
