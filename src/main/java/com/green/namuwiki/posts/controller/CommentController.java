@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.spec.ECField;
 import java.util.List;
 
 @Slf4j
@@ -41,6 +43,36 @@ public class CommentController {
 
     } catch (Exception e){
       log.error("댓글 조회 중 오류", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  // 댓글 수정 api
+  // (put) localhost:8080/api/comments/7
+  @PutMapping("/{id}")
+  public ResponseEntity<?> updateComment(
+      @PathVariable("id") Long id,
+      @RequestBody CommentRequestDTO commentRequestDTO
+  ){
+    try {
+      commentRequestDTO.setId(id);
+      commentService.updateComment(commentRequestDTO);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    } catch (Exception e){
+      log.error("댓글 수정 중 오류", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  // 댓글 삭제 api
+  // (delete) localhost:8080/api/comments/9
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> deleteComment(@PathVariable("id") Long id){
+    try {
+      commentService.deleteComment(id);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    } catch (Exception e){
+      log.error("댓글 삭제 중 오류", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 

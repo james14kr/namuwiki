@@ -15,4 +15,10 @@ public interface CommentMapper {
   // 게시글별 댓글 목록 조회 쿼리 실행 메서드
   List<CommentResponseDTO> selectComment(Long postId);
 
+  // 댓글 수정 쿼리 실행 메서드
+  void updateComment(CommentRequestDTO commentRequestDTO);
+
+  // 댓글 삭제 쿼리 실행 메서드
+  void deleteComment(Long id);
+
 }
