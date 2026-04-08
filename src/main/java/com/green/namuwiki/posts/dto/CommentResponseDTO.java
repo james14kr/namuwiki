@@ -8,15 +8,15 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 @Getter
-@AllArgsConstructor
-@ToString
 @Setter
-public class PostResponseDTO {
+@ToString
+@AllArgsConstructor
+public class CommentResponseDTO {
   private Long id;
-  private String title;
+  private Long postId;
+  private String memEmail;
+  private String memNickname;
   private String content;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
-  private String memEmail;
-  private String memNickname;
 }

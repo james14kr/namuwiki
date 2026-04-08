@@ -1,15 +1,16 @@
 package com.green.namuwiki.posts.dto;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@ToString
 @Setter
-public class PostRequestDTO {
+@ToString
+public class CommentRequestDTO {
   private Long id;
-  private String title;
-  private String content;
+  private Long postId;
   private String memEmail;
+  private String content;
 }

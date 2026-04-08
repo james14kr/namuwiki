@@ -50,6 +50,7 @@
         SELECT MEM_EMAIL
             , MEM_PW
             , MEM_ROLE
+            , MEM_NICKNAME
         FROM MEM_INFO
         WHERE MEM_EMAIL = #{memEmail}
     </select>
