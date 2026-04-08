@@ -39,6 +39,11 @@ public class CustomUserDetails implements UserDetails {
     return memberDTO.getMemEmail();
   }
 
+  // 닉네임 반환
+  public String getMemNickname() {
+    return memberDTO.getMemNickname();
+  }
+
   //만료되지 않은 계정인가?
   @Override
   public boolean isAccountNonExpired() {
