@@ -1,0 +1,18 @@
+package com.green.namuwiki.posts.mapper;
+
+import com.green.namuwiki.posts.dto.CommentRequestDTO;
+import com.green.namuwiki.posts.dto.CommentResponseDTO;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface CommentMapper {
+
+  // 댓글 등록 쿼리 실행 메서드
+  void insertComment(CommentRequestDTO commentRequestDTO);
+
+  // 게시글별 댓글 목록 조회 쿼리 실행 메서드
+  List<CommentResponseDTO> selectComment(Long postId);
+
+}
