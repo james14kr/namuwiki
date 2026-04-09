@@ -20,6 +20,14 @@
         FROM FARM
         ORDER BY CREATED_DATE DESC
     </select>
+
+    <select id="selectFarmById" parameterType="int" resultType="com.green.namuwiki.farm.dto.FarmDTO">
+        SELECT F.FARM_ID, F.FARMER_EMAIL, F.FARM_NAME, F.FARM_ADDR, F.FARM_DESC,
+            M.MEM_NAME, M.MEM_NICKNAME, M.MEM_TEL, M.MEM_PROFILE_IMG
+        FROM FARM F
+        JOIN MEM_INFO M ON F.FARMER_EMAIL = M.MEM_EMAIL
+        WHERE F.FARM_ID = #{farmId}
+    </select>
 	
 </mapper>
 

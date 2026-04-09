@@ -20,4 +20,9 @@ public class FarmService {
   public List<FarmDTO> getFarmList() {
     return farmMapper.selectFarmList();
   }
+
+  public FarmDTO getFarmById(int farmId){
+    return farmMapper.selectFarmById(farmId);
+  }
+
 }
