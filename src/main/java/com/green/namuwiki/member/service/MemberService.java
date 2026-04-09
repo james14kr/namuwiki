@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -47,7 +49,29 @@ public class MemberService {
     return memberMapper.searchNickname(memNickname);
   }
 
+  // 전체 사용자 조회
+  public List<MemberDTO> memberList(){
+    return memberMapper.memberList();
+  }
 
+  // 관리자 권한 사용자 추가
+  public void addAdmin(MemberDTO memberDTO){
+    // 입력한 비밀번호를 암호화
+    String encodePw = passwordEncoder.encode(memberDTO.getMemPw());
+    memberDTO.setMemPw(encodePw);
+
+    memberMapper.addAdmin(memberDTO);
+  }
+
+  // 회원삭제 기능 실행
+  public void deleteMember(String memEmail){
+    memberMapper.deleteMember(memEmail);
+  }
+
+  // 권한 변경 기능 실행
+  public void updateRole(MemberDTO memberDTO){
+    memberMapper.updateRole(memberDTO);
+  }
 
 
 }

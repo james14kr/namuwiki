@@ -24,4 +24,14 @@ public class CommentService {
     return commentMapper.selectComment(postId);
   }
 
+  // 댓글 수정 기능
+  public void updateComment(CommentRequestDTO commentRequestDTO){
+    commentMapper.updateComment(commentRequestDTO);
+  }
+
+  // 댓글 삭제 기능
+  public void deleteComment(Long id){
+    commentMapper.deleteComment(id);
+  }
+
 }

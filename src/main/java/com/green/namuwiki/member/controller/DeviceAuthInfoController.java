@@ -33,4 +33,17 @@ public class DeviceAuthInfoController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
+
+  // 인증번호 유효성검사 정보 조회 api
+  // url: (POST) localhost:8080/authes/check-auth
+  @PostMapping("/check-auth")
+  public ResponseEntity<?> compareFarmerData(@RequestBody DeviceAuthInfoDTO deviceAuthInfoDTO){
+    try {
+      int result = deviceAuthInfoService.compareFarmerData(deviceAuthInfoDTO);
+      return ResponseEntity.status(HttpStatus.OK).body(result);
+    }catch (Exception e){
+      log.error("인증번호 유효성검사 정보 조회 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 }

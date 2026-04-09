@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 public class DeviceAuthInfoDTO {
   private int farmId;
   private String authCode;
-  private String farmerName;
-  private String farmerTel;
+  private String memName;
+  private String memTel;
   private String isUsed;
   private LocalDateTime createTime;
 }

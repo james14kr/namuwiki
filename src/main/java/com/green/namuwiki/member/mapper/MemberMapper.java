@@ -3,6 +3,8 @@ package com.green.namuwiki.member.mapper;
 import com.green.namuwiki.member.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface MemberMapper {
   // 회원가입 등록 쿼리 실행 메서드
@@ -17,6 +19,16 @@ public interface MemberMapper {
   // 닉네임 중복 조회 쿼리 실행
   String searchNickname(MemberDTO memNickname);
 
+  // 전체 사용자 조회
+  List<MemberDTO> memberList();
 
+  // 관리자권한 사용자 추가
+  void addAdmin(MemberDTO memberDTO);
+
+  // 회원삭제 쿼리 실행
+  void deleteMember(String memEmail);
+
+  // 권한 변경 쿼리 실행
+  void updateRole(MemberDTO memberDTO);
 
 }

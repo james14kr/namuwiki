@@ -19,8 +19,9 @@ public class MemInfoService {
     return memInfoMapper.myInfo(memEmail);
   }
 
-  public void deleteProfileImg() {
-    service.deleteImage("");
+  // 마이페이지 사진 수정 기능
+  public void updateProfileImg(MemInfoDTO memInfoDTO){
+    memInfoMapper.updateProfileImg(memInfoDTO);
   }
 
 

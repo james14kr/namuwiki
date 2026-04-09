@@ -30,4 +30,23 @@ public class MemInfoController {
     }
   }
 
+  // 마이페이지 사진 수정 api
+  // (put) localhost:8080/mayage/profile-img
+  @PutMapping("/profile-img")
+  public ResponseEntity<?> updateProfileImg(@RequestBody MemInfoDTO memInfoDTO){
+    try {
+      memInfoService.updateProfileImg(memInfoDTO);
+      return ResponseEntity.status(HttpStatus.OK).build();
+
+    } catch (Exception e){
+      log.error("사진 등록 수정 중 오류", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+
+
+
+
+
 }

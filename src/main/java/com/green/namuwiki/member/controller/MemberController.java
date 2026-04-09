@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.Console;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -72,7 +76,59 @@ public class MemberController {
 //    }
 //  }
 
+  // 전체 사용자 조회 api
+  // url: (GET) localhost:8080/members/member-list
+  @GetMapping("/member-list")
+  public ResponseEntity<?> memberList(){
+    try {
+      List<MemberDTO> memberListResult = memberService.memberList();
+      return ResponseEntity.status(HttpStatus.OK).body(memberListResult);
+    }catch (Exception e){
+      log.error("전체 사용자 조회 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 
+  // 관리자 권한 사용자 추가 api
+  // 관리자만 추가 가능함.
+  // url : (POST) localhost:8080/members/add-admin
+  //@PreAuthorize("hasRole('ADMIN')")
+  @PostMapping("/add-admin")
+  public ResponseEntity<?> addAdmin(@RequestBody MemberDTO memberDTO){
+    try {
+      memberService.addAdmin(memberDTO);
+      return ResponseEntity.status(HttpStatus.CREATED).build();
+    }catch (Exception e){
+      log.error("관리자 권한 사용자 추가 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  // 회원 삭제 api
+  // url: (DELETE) localhost:8080/members/delete-member
+  @DeleteMapping("/delete-member")
+  public ResponseEntity<?> deleteMember(@RequestParam String memEmail){
+    try{
+      memberService.deleteMember(memEmail);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    }catch (Exception e){
+      log.error("회원 삭제 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  // 권한 변경 api
+  // url: (PUT) localhost:8080/members/update-role
+  @PutMapping("/update-role")
+  public ResponseEntity<?> updateRole(@RequestBody MemberDTO memberDTO) {
+    try {
+      memberService.updateRole(memberDTO);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    }catch (Exception e){
+      log.error("권한변경 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 
 
 }

@@ -69,6 +69,51 @@
          WHERE MEM_NICKNAME = #{memNickname}
     </select>
 
+    <!--전체 사용자 조회-->
+    <select id="memberList" resultMap="member">
+        SELECT MEM_EMAIL
+            , MEM_NAME
+            , MEM_TEL
+            , MEM_ROLE
+            , MEM_JOIN_DATE
+        FROM MEM_INFO
+    </select>
+
+    <!--관리자권한 사용자 추가-->
+    <insert id="addAdmin">
+        INSERT INTO MEM_INFO(
+            MEM_EMAIL
+            , MEM_PW
+            , MEM_ROLE
+            , MEM_NICKNAME
+            , MEM_NAME
+            , MEM_TEL
+            , MEM_ADD
+            , ADD_DETAIL
+        ) VALUES (
+            #{memEmail}
+            , #{memPw}
+            , 'ADMIN'
+            , #{memNickname}
+            , #{memName}
+            , #{memTel}
+            , #{memAdd}
+            , #{addDetail}
+        )
+    </insert>
+
+    <!--사용자관리 페이지에서 회원 삭제-->
+    <delete id="deleteMember">
+        DELETE FROM MEM_INFO
+        WHERE MEM_EMAIL = #{memEmail}
+    </delete>
+
+    <!--권한 변경 쿼리-->
+    <update id="updateRole">
+        UPDATE MEM_INFO
+        SET MEM_ROLE = #{memRole}
+        WHERE MEM_EMAIL = #{memEmail}
+    </update>
 
 
 </mapper>

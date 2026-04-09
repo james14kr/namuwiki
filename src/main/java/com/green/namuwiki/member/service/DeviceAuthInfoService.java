@@ -19,4 +19,9 @@ public class DeviceAuthInfoService {
     deviceAuthInfoMapper.insertAuthCode(deviceAuthInfoDTO);
     return authCode;
   }
+
+  // 인증번호 유효성 검사 시 일치여부 판단 기능 실행 메서드
+  public int compareFarmerData(DeviceAuthInfoDTO deviceAuthInfoDTO){
+    return deviceAuthInfoMapper.compareFarmerData(deviceAuthInfoDTO);
+  }
 }

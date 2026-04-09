@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.namuwiki.follow.mapper.FollowMapper">
+
+    <!--팔로우-->
+    <insert id="follow">
+        INSERT INTO FOLLOW (FOLLOWER_EMAIL, FARMER_EMAIL)
+        VALUES (#{followerEmail}, #{farmerEmail})
+    </insert>
+
+    <!--언팔로우-->
+    <delete id="unfollow">
+        DELETE FROM FOLLOW
+        WHERE FOLLOWER_EMAIL = #{followerEmail} AND FARMER_EMAIL = #{farmerEmail}
+    </delete>
+
+    <!--팔로우 목록 조회(농장주 닉네임 포함)-->
+    <select id="getFollowList" resultType="com.green.namuwiki.follow.dto.FollowDTO">
+        SELECT F.FARMER_EMAIL AS farmerEmail
+            ,M.MEM_NICKNAME AS farmerNickname
+        FROM FOLLOW F
+        JOIN MEM_INFO M ON F.FARMER_EMAIL = M.MEM_EMAIL
+        WHERE F.FOLLOWER_EMAIL = #{followerEmail}
+    </select>
+
+    <!--팔로우 여부 확인-->
+    <select id="checkFollow" parameterType="com.green.namuwiki.farm.dto.FarmDTO" resultType="int">
+        SELECT COUNT(*) FROM FOLLOW
+        WHERE FOLLOWER_EMAIL = #{followerEmail}
+        AND FARMER_EMAIL = #{farmerEmail}
+    </select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

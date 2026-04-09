@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.namuwiki.farm.mapper.FarmMapper">
+
+    <insert id="insertFarm">
+        INSERT INTO FARM(FARMER_EMAIL, FARM_NAME, FARM_ADDR, FARM_DESC)
+        VALUES(#{farmerEmail},#{farmName},#{farmAddr},#{farmDesc} )
+    </insert>
+
+    <select id="selectFarmList" resultType="com.green.namuwiki.farm.dto.FarmDTO">
+        SELECT FARM_ID
+            ,FARMER_EMAIL
+            ,FARM_NAME
+            ,FARM_ADDR
+            ,FARM_DESC
+            ,CREATED_DATE
+        FROM FARM
+        ORDER BY CREATED_DATE DESC
+    </select>
+
+    <select id="selectFarmById" parameterType="int" resultType="com.green.namuwiki.farm.dto.FarmDTO">
+        SELECT F.FARM_ID, F.FARMER_EMAIL, F.FARM_NAME, F.FARM_ADDR, F.FARM_DESC,
+            M.MEM_NAME, M.MEM_NICKNAME, M.MEM_TEL, M.MEM_PROFILE_IMG
+        FROM FARM F
+        JOIN MEM_INFO M ON F.FARMER_EMAIL = M.MEM_EMAIL
+        WHERE F.FARM_ID = #{farmId}
+    </select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
