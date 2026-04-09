@@ -73,5 +73,9 @@ public class MemberService {
     memberMapper.updateRole(memberDTO);
   }
 
+  // 선택한 권한에 맞는 데이터만 조회하는 기능 실행 메서드
+  public List<MemberDTO> selectMemberList(String memRole){
+    return memberMapper.selectMemberList(memRole);
+  }
 
 }

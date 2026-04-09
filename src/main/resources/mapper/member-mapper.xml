@@ -115,6 +115,24 @@
         WHERE MEM_EMAIL = #{memEmail}
     </update>
 
+    <!--선택한 권한 리스트 조회-->
+    <!-- <where> : 안에 조건이 있을 때는 where 키워드 자동으로 붙여줌,
+        안에 조건이 없을 땐 where 키워드 자체를 없애버림
+        조건 앞에 AND / OR 있으면 자동으로 제거해줌-->
+    <select id="memberList" resultMap="member">
+        SELECT MEM_EMAIL
+        , MEM_NAME
+        , MEM_TEL
+        , MEM_ROLE
+        , MEM_JOIN_DATE
+        FROM MEM_INFO
+        <where>
+            <if test="memRole != null and memRole != ''">
+                AND MEM_ROLE = #{memRole}
+            </if>
+        </where>
+    </select>
+
 
 </mapper>
 
