@@ -17,6 +17,6 @@ public interface MemberMapper {
   // 닉네임 중복 조회 쿼리 실행
   String searchNickname(MemberDTO memNickname);
 
-
-
+  // 전체 사용자 조회
+  MemberDTO memberList();
 }

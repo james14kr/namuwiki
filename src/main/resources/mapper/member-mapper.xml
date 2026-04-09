@@ -68,6 +68,16 @@
          WHERE MEM_NICKNAME = #{memNickname}
     </select>
 
+    <!--전체 사용자 조회-->
+    <select id="memberList" resultMap="member">
+        SELECT MEM_EMAIL
+            , MEM_NAME
+            , MEM_TEL
+            , MEM_ROLE
+            , MEM_JOIN_DATE
+        FROM MEM_INFO
+    </select>
+
 
 
 </mapper>
