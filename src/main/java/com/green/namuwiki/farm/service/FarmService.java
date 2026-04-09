@@ -25,4 +25,8 @@ public class FarmService {
     return farmMapper.selectFarmById(farmId);
   }
 
+  public List<FarmDTO> getMyFarms(String farmerEmail){
+    return farmMapper.selectFarmsByEmail(farmerEmail);
+  }
+
 }

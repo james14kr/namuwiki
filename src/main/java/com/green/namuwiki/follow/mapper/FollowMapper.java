@@ -20,5 +20,7 @@ public interface FollowMapper {
   //팔로우 여부 확인
   int checkFollow(FollowDTO dto);
 
+  //팔로워 목록
+  List<FollowDTO> getFollowerList(String farmerEmail);
 
 }
