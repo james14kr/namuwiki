@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -47,7 +49,10 @@ public class MemberService {
     return memberMapper.searchNickname(memNickname);
   }
 
-
+  // 전체 사용자 조회
+  public List<MemberDTO> memberList(){
+    return memberMapper.memberList();
+  }
 
 
 }

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/members")
@@ -72,6 +74,18 @@ public class MemberController {
 //    }
 //  }
 
+  // 전체 사용자 조회 api
+  // url: (GET) localhost:8080/members/member-list
+  @GetMapping("/member-list")
+  public ResponseEntity<?> memberList(){
+    try {
+      List<MemberDTO> memberListResult = memberService.memberList();
+      return ResponseEntity.status(HttpStatus.OK).body(memberListResult);
+    }catch (Exception e){
+      log.error("전체 사용자 조회 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 
 
 
