@@ -12,4 +12,6 @@ public interface FarmMapper {
 
   List<FarmDTO> selectFarmList();
 
+  FarmDTO selectFarmById(int farmId);
+
 }

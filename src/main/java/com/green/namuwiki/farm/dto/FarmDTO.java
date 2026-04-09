@@ -15,4 +15,9 @@ public class FarmDTO {
   private String farmAddr;
   private String farmDesc;
 
+  private String memName;
+  private String memNickname;
+  private String memTel;
+  private String memProfileImg;
+
 }
