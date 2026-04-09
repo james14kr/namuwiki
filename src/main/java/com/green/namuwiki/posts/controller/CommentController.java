@@ -75,9 +75,5 @@ public class CommentController {
       log.error("댓글 삭제 중 오류", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
-
   }
-
-
-
 }
