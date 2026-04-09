@@ -34,4 +34,9 @@ public class FarmController {
     return ResponseEntity.ok(farmService.getFarmById(farmId));
   }
 
+  @GetMapping("/my")
+  public ResponseEntity<List<FarmDTO>> getMyFarms(@RequestParam String farmerEmail){
+    return ResponseEntity.ok(farmService.getMyFarms(farmerEmail));
+  }
+
 }
