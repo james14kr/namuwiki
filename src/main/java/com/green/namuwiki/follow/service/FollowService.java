@@ -25,4 +25,8 @@ public class FollowService {
     return followMapper.getFollowList(followerEmail);
   }
 
+  public boolean checkFollow(FollowDTO dto){
+    return followMapper.checkFollow(dto) > 0;
+  }
+
 }

@@ -38,4 +38,11 @@ public class FollowController {
     return ResponseEntity.ok(followService.getFollowList(followerEmail));
   }
 
+  /*팔로우 여부 확인*/
+  @GetMapping("/check")
+  public ResponseEntity<Boolean> checkFollow(@ModelAttribute FollowDTO dto){
+    Boolean result = followService.checkFollow(dto);
+    return ResponseEntity.ok(result);
+  }
+
 }

@@ -25,6 +25,13 @@
         JOIN MEM_INFO M ON F.FARMER_EMAIL = M.MEM_EMAIL
         WHERE F.FOLLOWER_EMAIL = #{followerEmail}
     </select>
+
+    <!--팔로우 여부 확인-->
+    <select id="checkFollow" parameterType="int" resultType="com.green.namuwiki.farm.dto.FarmDTO">
+        SELECT COUNT(*) FROM FOLLOW
+        WHERE FOLLOWER_EMAIL = #{followerEmail}
+        AND FARMER_EMAIL = #{farmerEmail}
+    </select>
 	
 </mapper>
 
