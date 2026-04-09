@@ -12,4 +12,6 @@ public interface FollowMapper {
   void unfollow(FollowDTO dto);
   List<FollowDTO> getFollowList(String followerEmail);
 
+
+
 }
