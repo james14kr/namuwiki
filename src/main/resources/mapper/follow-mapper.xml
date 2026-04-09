@@ -32,7 +32,17 @@
         WHERE FOLLOWER_EMAIL = #{followerEmail}
         AND FARMER_EMAIL = #{farmerEmail}
     </select>
-	
+
+    <!--팔로워 목록 조회-->
+    <select id="getFollowerList" parameterType="String" resultType="com.green.namuwiki.follow.dto.FollowDTO">
+        SELECT F.FOLLOWER_EMAIL AS followerEmail,
+            F.FARMER_EMAIL AS farmerEmail,
+            M.MEM_NICKNAME AS followerNickname
+        FROM FOLLOW F
+        JOIN MEM_INFO M ON F.FOLLOWER_EMAIL = M.MEM_EMAIL
+        WHERE F.FARMER_EMAIL = #{farmerEmail}
+    </select>
+
 </mapper>
 
 
