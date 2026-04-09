@@ -63,5 +63,15 @@ public class MemberService {
     memberMapper.addAdmin(memberDTO);
   }
 
+  // 회원삭제 기능 실행
+  public void deleteMember(String memEmail){
+    memberMapper.deleteMember(memEmail);
+  }
+
+  // 권한 변경 기능 실행
+  public void updateRole(MemberDTO memberDTO){
+    memberMapper.updateRole(memberDTO);
+  }
+
 
 }
