@@ -24,4 +24,11 @@ public interface MemberMapper {
 
   // 관리자권한 사용자 추가
   void addAdmin(MemberDTO memberDTO);
+
+  // 회원삭제 쿼리 실행
+  void deleteMember(String memEmail);
+
+  // 권한 변경 쿼리 실행
+  void updateRole(MemberDTO memberDTO);
+
 }
