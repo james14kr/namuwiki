@@ -2,12 +2,14 @@ package com.green.namuwiki.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.namuwiki.member.dto.MemberDTO;
+import com.green.namuwiki.security.dto.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.javassist.compiler.ast.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -114,8 +116,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     GrantedAuthority auth = iterator.next();
     String role = auth.getAuthority();
 
+//  3. 로그인 검증 성공 유저의 닉네임
+    CustomUserDetails customUserDetails = (CustomUserDetails) authResult.getPrincipal();
+    String memNickname = customUserDetails.getMemNickname();
+
 //    JWT 토큰을 생성
-    String token = jwtUtil.createJwt(userEmail, role, 1000 * 60 * 120); //1000 = 1초
+    String token = jwtUtil.createJwt(userEmail, role, 1000L * 60 * 120, memNickname); //1000 = 1초
 
 //    생성한 토큰을 응답 헤더에 담아 react에 전달
     response.setHeader("Access-Control-Expose-Headers", "Authorization");

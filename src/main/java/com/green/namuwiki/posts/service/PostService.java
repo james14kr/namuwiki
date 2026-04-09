@@ -29,5 +29,10 @@ public class PostService {
     postMapper.deleteDetail(id);
   }
 
+  // 상세보기에서 게시글 수정
+  public void updatePost(PostRequestDTO postRequestDTO){
+    postMapper.updatePost(postRequestDTO);
+  }
+
 
 }
