@@ -79,7 +79,28 @@
         FROM MEM_INFO
     </select>
 
-
+    <!--관리자권한 사용자 추가-->
+    <insert id="addAdmin">
+        INSERT INTO MEM_INFO(
+            MEM_EMAIL
+            , MEM_PW
+            , MEM_ROLE
+            , MEM_NICKNAME
+            , MEM_NAME
+            , MEM_TEL
+            , MEM_ADD
+            , ADD_DETAIL
+        ) VALUES (
+            #{memEmail}
+            , #{memPw}
+            , 'ADMIN'
+            , #{memNickname}
+            , #{memName}
+            , #{memTel}
+            , #{memAdd}
+            , #{addDetail}
+        )
+    </insert>
 
 
 </mapper>

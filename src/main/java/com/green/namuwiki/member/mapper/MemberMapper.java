@@ -21,4 +21,7 @@ public interface MemberMapper {
 
   // 전체 사용자 조회
   List<MemberDTO> memberList();
+
+  // 관리자권한 사용자 추가
+  void addAdmin(MemberDTO memberDTO);
 }

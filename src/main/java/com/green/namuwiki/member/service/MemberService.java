@@ -54,5 +54,14 @@ public class MemberService {
     return memberMapper.memberList();
   }
 
+  // 관리자 권한 사용자 추가
+  public void addAdmin(MemberDTO memberDTO){
+    // 입력한 비밀번호를 암호화
+    String encodePw = passwordEncoder.encode(memberDTO.getMemPw());
+    memberDTO.setMemPw(encodePw);
+
+    memberMapper.addAdmin(memberDTO);
+  }
+
 
 }

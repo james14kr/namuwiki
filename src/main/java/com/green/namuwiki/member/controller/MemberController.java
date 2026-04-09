@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Console;
 import java.util.List;
 
 @RestController
@@ -87,6 +89,19 @@ public class MemberController {
     }
   }
 
-
+  // 관리자 권한 사용자 추가 api
+  // 관리자만 추가 가능함.
+  // url : (POST) localhost:8080/members/add-admin
+  //@PreAuthorize("hasRole('ADMIN')")
+  @PostMapping("/add-admin")
+  public ResponseEntity<?> addAdmin(@RequestBody MemberDTO memberDTO){
+    try {
+      memberService.addAdmin(memberDTO);
+      return ResponseEntity.status(HttpStatus.CREATED).build();
+    }catch (Exception e){
+      log.error("관리자 권한 사용자 추가 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 
 }
