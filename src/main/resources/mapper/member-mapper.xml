@@ -102,6 +102,19 @@
         )
     </insert>
 
+    <!--사용자관리 페이지에서 회원 삭제-->
+    <delete id="deleteMember">
+        DELETE FROM MEM_INFO
+        WHERE MEM_EMAIL = #{memEmail}
+    </delete>
+
+    <!--권한 변경 쿼리-->
+    <update id="updateRole">
+        UPDATE MEM_INFO
+        SET MEM_ROLE = #{memRole}
+        WHERE MEM_EMAIL = #{memEmail}
+    </update>
+
 
 </mapper>
 

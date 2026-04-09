@@ -104,4 +104,31 @@ public class MemberController {
     }
   }
 
+  // 회원 삭제 api
+  // url: (DELETE) localhost:8080/members/delete-member
+  @DeleteMapping("/delete-member")
+  public ResponseEntity<?> deleteMember(@RequestParam String memEmail){
+    try{
+      memberService.deleteMember(memEmail);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    }catch (Exception e){
+      log.error("회원 삭제 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  // 권한 변경 api
+  // url: (PUT) localhost:8080/members/update-role
+  @PutMapping("/update-role")
+  public ResponseEntity<?> updateRole(@RequestBody MemberDTO memberDTO) {
+    try {
+      memberService.updateRole(memberDTO);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    }catch (Exception e){
+      log.error("권한변경 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+
 }
