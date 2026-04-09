@@ -30,6 +30,7 @@
             , C.CONTENT AS content
             , C.CREATED_AT AS createdAt
             , C.UPDATED_AT AS updatedAt
+            , M.MEM_PROFILE_IMG AS memProfileImg
         FROM
             COMMENTS C
         LEFT JOIN
