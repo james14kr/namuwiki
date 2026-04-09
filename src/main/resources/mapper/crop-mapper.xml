@@ -16,7 +16,7 @@
             #{farmId},
             #{cropName},
             #{cropDesc},
-            #{cropPrice},
+            #{cropPrice}
         )
     </insert>
 
