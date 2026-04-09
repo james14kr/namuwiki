@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.namuwiki.member.mapper.DeviceAuthInfoMapper">
+	<resultMap id="member" type="com.green.namuwiki.member.dto.DeviceAuthInfoDTO">
+        <id column="FARM_ID" property="farmId" />
+        <result column="AUTH_CODE" property="authCode" />
+        <result column="MEM_NAME" property="memName" />
+        <result column="MEM_TEL" property="memTel" />
+        <result column="IS_USED" property="isUsed" />
+        <result column="CREATE_TIME" property="createTime" />
+    </resultMap>
+
+    <!--인증번호 등록 쿼리-->
+    <insert id="insertAuthCode">
+        INSERT INTO DEVICE_AUTH (
+            AUTH_CODE
+            , MEM_NAME
+            , MEM_TEL
+        ) VALUES (
+            #{authCode}
+            , #{memName}
+            , #{memTel}
+        )
+    </insert>
+
+    <!--인증번호 검증 쿼리 : 있으면 1 => 검증 통과, 없으면 0 => 검증 실패-->
+    <select id="selectAuthCode" resultType="int">
+        SELECT COUNT(*)
+        FROM DEVICE_AUTH
+        WHERE AUTH_CODE = #{authCode}
+        AND IS_USED = "N"
+    </select>
+
+    <!--인증번호 유효성 검사 시 일치여부 판단하는 쿼리 : 있으면 1, 없으면 0-->
+    <select id="compareFarmerData" resultType="int">
+        SELECT COUNT(*)
+        FROM DEVICE_AUTH
+        WHERE AUTH_CODE = #{authCode}
+        AND MEM_NAME = #{memName}
+        AND MEM_TEL = #{memTel}
+    </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
