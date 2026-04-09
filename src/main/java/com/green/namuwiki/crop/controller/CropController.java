@@ -1,0 +1,32 @@
+package com.green.namuwiki.crop.controller;
+
+import com.green.namuwiki.crop.dto.CropDTO;
+import com.green.namuwiki.crop.service.CropService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Slf4j
+@RestController
+@RequestMapping("/crop")
+@RequiredArgsConstructor
+public class CropController {
+
+  private final CropService cropService;
+
+  @PostMapping
+  public ResponseEntity<Integer> registerCrop(@RequestBody CropDTO dto){
+    cropService.registerCrop(dto);
+    return ResponseEntity.ok().build();
+  }
+
+  @GetMapping
+  public ResponseEntity<List<CropDTO>> getCropList(@RequestParam int farmId){
+    return ResponseEntity.ok(cropService.getCropList(farmId));
+  }
+
+}
+

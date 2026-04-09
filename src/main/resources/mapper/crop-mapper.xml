@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.namuwiki.crop.mapper.CropMapper">
+
+    <!--농작물 등록-->
+    <insert id="insertCrop" parameterType="com.green.namuwiki.crop.dto.CropDTO">
+        INSERT INTO CROP(FARM_ID,
+            CROP_NAME
+            ,CROP_DESC
+            ,CROP_PRICE
+        )
+        VALUES(
+            #{farmId},
+            #{cropName},
+            #{cropDesc},
+            #{cropPrice},
+        )
+    </insert>
+
+    <!--등록한 농작물 목록 조회-->
+    <select id="getCropListByFarmId" parameterType="int" resultType="com.green.namuwiki.crop.dto.CropDTO">
+        SELECT CROP_ID AS cropId
+            ,FARM_ID AS farmId
+            ,CROP_NAME AS cropName
+            ,CROP_DESC AS cropDesc
+            ,CROP_PRICE AS cropPrice
+        FROM CROP
+        WHERE FARM_ID = #{farmId}
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
