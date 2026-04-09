@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.Console;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +26,12 @@ public class MemberController {
     try {
       memberService.joinData(memberDTO);
       return ResponseEntity.status(HttpStatus.CREATED).build();
-    }catch (Exception e){
+    }
+    catch (IllegalArgumentException e){
+      // 인증번호를 잘못 입력했을 때 발생하는 오류
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+    catch (Exception e){
       log.error("회원가입 중 오류 발생", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
@@ -67,18 +76,32 @@ public class MemberController {
 //    }
 //  }
 
-  // 인증번호 등록 api
-  // url: (POST) localhost:8080/members/authCode
-  @PostMapping("/authCode")
-  public ResponseEntity<?> insertAuthCode(@RequestBody String authCode){
+  // 전체 사용자 조회 api
+  // url: (GET) localhost:8080/members/member-list
+  @GetMapping("/member-list")
+  public ResponseEntity<?> memberList(){
     try {
-      memberService.insertAuthCode(authCode);
-      return ResponseEntity.status(HttpStatus.CREATED).build();
+      List<MemberDTO> memberListResult = memberService.memberList();
+      return ResponseEntity.status(HttpStatus.OK).body(memberListResult);
     }catch (Exception e){
-      log.error("인증번호 api 등록 중 오류 발생", e);
+      log.error("전체 사용자 조회 중 오류 발생", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
 
+  // 관리자 권한 사용자 추가 api
+  // 관리자만 추가 가능함.
+  // url : (POST) localhost:8080/members/add-admin
+  //@PreAuthorize("hasRole('ADMIN')")
+  @PostMapping("/add-admin")
+  public ResponseEntity<?> addAdmin(@RequestBody MemberDTO memberDTO){
+    try {
+      memberService.addAdmin(memberDTO);
+      return ResponseEntity.status(HttpStatus.CREATED).build();
+    }catch (Exception e){
+      log.error("관리자 권한 사용자 추가 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 
 }
