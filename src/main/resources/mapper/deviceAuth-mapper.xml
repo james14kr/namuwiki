@@ -4,7 +4,7 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
 <mapper namespace="com.green.namuwiki.member.mapper.DeviceAuthMapper">
-	<resultMap id="member" type="com.green.namuwiki.member.dto.DeviceAuthDTO">
+	<resultMap id="deviceAuth" type="com.green.namuwiki.member.dto.DeviceAuthDTO">
         <id column="FARM_ID" property="farmId" />
         <result column="AUTH_CODE" property="authCode" />
         <result column="MEM_NAME" property="memName" />
