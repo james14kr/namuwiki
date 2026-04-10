@@ -14,6 +14,9 @@ public interface CropMapper {
   //농작물 목록 조회
   List<CropDTO> getCropListByFarmId(int farmId);
 
+  //농장주 이메일로 해당 농장주의 모든 농작물 조회
+  List<CropDTO> getCropListByFarmerEmail(String farmerEmail);
+
   //특정 농장에 속한 농작물을 모두 삭제
   void deleteCropByFarmId(int farmId);
 

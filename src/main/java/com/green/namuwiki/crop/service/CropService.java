@@ -28,4 +28,9 @@ public class CropService {
     cropMapper.deleteCrop(cropId);
   }
 
+  //농장주 이메일로 전체 농작물 목록 반환
+  public List<CropDTO> getCropListByFarmerEmail(String farmerEmail){
+    return cropMapper.getCropListByFarmerEmail(farmerEmail);
+  }
+
 }

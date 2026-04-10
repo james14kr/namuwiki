@@ -44,6 +44,16 @@
         WHERE CROP_ID = #{cropId}
     </delete>
 
+    <select id="getCropListByFarmerEmail" parameterType="String" resultType="com.green.namuwiki.crop.dto.CropDTO">
+        SELECT C.CROP_ID AS cropId,
+            C.FARM_ID AS farmId,
+            C.CROP_NAME AS cropName
+        FROM CROP C
+        JOIN FARM F ON C.FARM_ID = F.FARM_ID
+        WHERE F.FARMER_EMAIL = #{farmerEmail}
+        ORDER BY C.CROP_ID DESC
+    </select>
+
 </mapper>
 
 

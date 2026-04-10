@@ -36,5 +36,12 @@ public class CropController {
     return ResponseEntity.ok().build();
   }
 
+  // GET /crop/my?farmerEmail=xxx@xxx.com
+  //농장주가 기기 등록 시 연결할 농작물 목록 선택에 사용
+  @GetMapping("/my")
+  public ResponseEntity<List<CropDTO>> getMyCropList(@RequestParam String farmerEmail){
+    return ResponseEntity.ok(cropService.getCropListByFarmerEmail(farmerEmail));
+  }
+
 }
 
