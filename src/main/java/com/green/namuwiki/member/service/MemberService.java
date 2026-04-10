@@ -1,8 +1,7 @@
 package com.green.namuwiki.member.service;
 
-import com.green.namuwiki.member.dto.DeviceAuthInfoDTO;
 import com.green.namuwiki.member.dto.MemberDTO;
-import com.green.namuwiki.member.mapper.DeviceAuthInfoMapper;
+import com.green.namuwiki.member.mapper.DeviceAuthMapper;
 import com.green.namuwiki.member.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +14,7 @@ import java.util.List;
 public class MemberService {
   private final MemberMapper memberMapper;
   private final PasswordEncoder passwordEncoder;
-  private final DeviceAuthInfoMapper deviceAuthInfoMapper;
+  private final DeviceAuthMapper deviceAuthMapper;
 
   // 회원가입 등록 실행 메서드
   public void joinData(MemberDTO memberDTO) throws Exception {
@@ -25,7 +24,7 @@ public class MemberService {
 
     // 농장주 일 때만 검증
     if("FARMER".equals(memberDTO.getMemRole())){
-      int isValid = deviceAuthInfoMapper.selectAuthCode(memberDTO.getAuthCode());
+      int isValid = deviceAuthMapper.selectAuthCode(memberDTO.getAuthCode());
       if (isValid == 0){
         // 잘못 입력된 데이터를 새로운 객체로 생성해 controller의 catch Exception에 던진다.
         throw new IllegalArgumentException("인증번호가 올바르지 않습니다.");

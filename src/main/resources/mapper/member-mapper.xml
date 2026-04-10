@@ -119,7 +119,7 @@
     <!-- <where> : 안에 조건이 있을 때는 where 키워드 자동으로 붙여줌,
         안에 조건이 없을 땐 where 키워드 자체를 없애버림
         조건 앞에 AND / OR 있으면 자동으로 제거해줌-->
-    <select id="memberList" resultMap="member">
+    <select id="selectMemberList" resultMap="member">
         SELECT MEM_EMAIL
         , MEM_NAME
         , MEM_TEL

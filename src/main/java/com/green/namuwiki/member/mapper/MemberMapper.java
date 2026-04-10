@@ -37,4 +37,5 @@ public interface MemberMapper {
   // => xml에서 이름으로 접근 가능해짐, 매개변수가 1개(String, int형), 매개변수가 2개 이상일 때 필요
   List<MemberDTO> selectMemberList(@Param("memRole") String memRole);
 
+
 }
