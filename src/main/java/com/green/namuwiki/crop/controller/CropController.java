@@ -31,7 +31,7 @@ public class CropController {
   //DElETE /crop/{cropId}
   //농장주가 자신의 농장에 등록된 농작물을 삭제할 때 호출
   @DeleteMapping("/{cropId}")
-  public ResponseEntity<?> deleteCrop(@RequestParam int cropId){
+  public ResponseEntity<?> deleteCrop(@PathVariable int cropId){
     cropService.deleteCrop(cropId);
     return ResponseEntity.ok().build();
   }
