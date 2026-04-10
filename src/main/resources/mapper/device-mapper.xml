@@ -3,8 +3,49 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
-<mapper namespace="mapper">
-	
+<mapper namespace="com.green.namuwiki.device.mapper.DeviceMapper">
+
+    <!--관리자: 기기 ID 생성-->
+    <insert id="insertDevice" parameterType="String">
+        INSERT INTO DEVICE(DEVICE_ID, CREATED_AT)
+        VALUES(#{deviceId}, NOW())
+    </insert>
+
+    <!--관리자: 전체 기기 목록 조회(농장주, 농작물, 농장 정보 포함)-->
+    <select id="getAllDevices" resultType="com.green.namuwiki.device.dto.DeviceDTO">
+        SELECT D.DEVICE_ID AS deviceId,
+            D.CROP_ID AS cropId,
+            D.FARMER_EMAIL AS farmerEmail,
+            D.IS_ACTIVE AS isActive,
+            D.REGISTERED_AT AS registeredAt,
+            D.CREATED_AT AS createdAt,
+            C.CROP_NAME AS cropName,
+            F.FARM_NAME AS farmNAme
+        FROM DEVICE D
+        LEFT JOIN CROP C ON D.CROP_ID = C.CROP_ID
+        LEFT JOIN FARM F ON C.FARM_ID = C.FARM_ID
+        ORDER BY D.CREATED_AT DESC
+    </select>
+
+    <!--농장주: 기기 등록(기기 ID에 농작물 연결)-->
+    <update id="registerDevice" parameterType="DeviceDTO">
+        UPDATE DEVICE
+        SET CROP_ID = #{cropId},
+            FARMER_EMAIL = #{farmerEmaiL},
+            IS_ACTIVE = 1,
+            REGISTERED_AT = NOW()
+        WHERE DEVICE_ID = #{device_id} AND IS_ACTIVE = 0
+    </update>
+
+    <!--유효성 검사: 기기 ID 존재 여부-->
+    <select id="findByDeviceId" parameterType="String">
+        SELECT DEVICE_ID AS deviceId,
+            IS_ACTIVE AS isActive
+        FROM DEVICE
+        WHERE DEVICE_ID = #{deviceId}
+    </select>
+
+
 </mapper>
 
 
