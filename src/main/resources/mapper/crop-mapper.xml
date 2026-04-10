@@ -47,7 +47,9 @@
     <select id="getCropListByFarmerEmail" parameterType="String" resultType="com.green.namuwiki.crop.dto.CropDTO">
         SELECT C.CROP_ID AS cropId,
             C.FARM_ID AS farmId,
-            C.CROP_NAME AS cropName
+            C.CROP_NAME AS cropName,
+            C.CROP_DESC AS cropDesc,
+            C.CROP_PRICE AS cropPrice
         FROM CROP C
         JOIN FARM F ON C.FARM_ID = F.FARM_ID
         WHERE F.FARMER_EMAIL = #{farmerEmail}

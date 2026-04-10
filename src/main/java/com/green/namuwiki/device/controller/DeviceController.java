@@ -26,7 +26,7 @@ public class DeviceController {
 
   // 관리자: 전체 기기 목록 조회
   // GET /device/admin
-  @GetMapping
+  @GetMapping("/admin")
   public ResponseEntity<List<DeviceDTO>> getAllDevices(){
     return ResponseEntity.ok(deviceService.getAllDevices());
   }

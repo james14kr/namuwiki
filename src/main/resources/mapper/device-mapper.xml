@@ -31,10 +31,10 @@
     <update id="registerDevice" parameterType="DeviceDTO">
         UPDATE DEVICE
         SET CROP_ID = #{cropId},
-            FARMER_EMAIL = #{farmerEmaiL},
+            FARMER_EMAIL = #{farmerEmail},
             IS_ACTIVE = 1,
             REGISTERED_AT = NOW()
-        WHERE DEVICE_ID = #{device_id} AND IS_ACTIVE = 0
+        WHERE DEVICE_ID = #{deviceId} AND IS_ACTIVE = 0
     </update>
 
     <!--유효성 검사: 기기 ID 존재 여부-->
