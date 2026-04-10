@@ -22,4 +22,10 @@ public class CropService {
   public List<CropDTO> getCropList(int farmId){
     return cropMapper.getCropListByFarmId(farmId);
   }
+
+  //농작물 ID로 해당 농작물 삭제
+  public void deleteCrop(int cropId){
+    cropMapper.deleteCrop(cropId);
+  }
+
 }
