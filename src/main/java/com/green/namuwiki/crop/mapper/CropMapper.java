@@ -17,4 +17,7 @@ public interface CropMapper {
   //특정 농장에 속한 농작물을 모두 삭제
   void deleteCropByFarmId(int farmId);
 
+  //농작물 ID로 해당하는 농작물 삭제
+  void deleteCrop(int cropId);
+
 }

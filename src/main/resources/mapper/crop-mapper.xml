@@ -38,6 +38,12 @@
         WHERE FARM_ID = #{farmID}
     </delete>
 
+    <!--농작물 ID로 해당 농작물 삭제-->
+    <delete id="deleteCrop" parameterType="int">
+        DELETE FROM CROP
+        WHERE CROP_ID = #{cropId}
+    </delete>
+
 </mapper>
 
 
