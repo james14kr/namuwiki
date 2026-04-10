@@ -14,4 +14,7 @@ public interface CropMapper {
   //농작물 목록 조회
   List<CropDTO> getCropListByFarmId(int farmId);
 
+  //특정 농장에 속한 농작물을 모두 삭제
+  void deleteCropByFarmId(int farmId);
+
 }

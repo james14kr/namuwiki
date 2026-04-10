@@ -1,5 +1,6 @@
 package com.green.namuwiki.farm.service;
 
+import com.green.namuwiki.crop.mapper.CropMapper;
 import com.green.namuwiki.farm.dto.FarmDTO;
 import com.green.namuwiki.farm.mapper.FarmMapper;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 public class FarmService {
 
   private final FarmMapper farmMapper;
+  private final CropMapper cropMapper;
 
   public int registerFarm(FarmDTO dto){
     return farmMapper.insertFarm(dto);

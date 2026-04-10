@@ -20,4 +20,7 @@ public interface FarmMapper {
   //농장주가 등록한 노우장 목록
   List<FarmDTO> selectFarmsByEmail(String farmerEmail);
 
+  //농장 ID로 농장 삭제
+  void deleteFarm(int farmID);
+
 }

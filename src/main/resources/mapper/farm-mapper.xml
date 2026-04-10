@@ -39,6 +39,12 @@
         WHERE FARMER_EMAIL = #{farmerEmail}
         ORDER BY CREATED_DATE DESC
     </select>
+
+    <!--농장 ID로 농장 삭제-->
+    <delete id="deleteFarm" parameterType="int">
+        DELETE FROM FARM
+        WHERE FARM_ID = #{farmId}
+    </delete>
 	
 </mapper>
 
