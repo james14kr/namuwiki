@@ -12,5 +12,5 @@ public class FollowDTO {
   private String followerEmail;
   private String farmerEmail;
   private String farmerNickname;
-
+  private String followerNickname;
 }

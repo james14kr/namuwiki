@@ -34,4 +34,19 @@ public class FarmController {
     return ResponseEntity.ok(farmService.getFarmById(farmId));
   }
 
+  @GetMapping("/my")
+  public ResponseEntity<List<FarmDTO>> getMyFarms(@RequestParam String farmerEmail){
+    return ResponseEntity.ok(farmService.getMyFarms(farmerEmail));
+  }
+
+  //DELETE /farm/{farmId}
+  //농장주가 자신의 농장을 삭제할 떄 호출
+  //내부적으로 해당 농장의 농작물도 함께 삭제됨
+  @DeleteMapping("/{farmId}")
+  public ResponseEntity<?> deleteFarm(@PathVariable int farmId){
+    farmService.deleteFarm(farmId);
+    return ResponseEntity.ok().build();
+  }
+
+
 }

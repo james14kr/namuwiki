@@ -29,4 +29,8 @@ public class FollowService {
     return followMapper.checkFollow(dto) > 0;
   }
 
+  public List<FollowDTO> getFollowerList(String farmerEmail){
+    return followMapper.getFollowerList(farmerEmail);
+  }
+
 }

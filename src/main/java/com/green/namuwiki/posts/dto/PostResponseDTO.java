@@ -20,4 +20,5 @@ public class PostResponseDTO {
   private String memEmail;
   private String memNickname;
   private String memProfileImg;
+  private int viewCount;
 }
