@@ -50,6 +50,7 @@
             , CREATE_TIME
             , AUTH_CODE
         FROM DEVICE_AUTH
+        ORDER BY CREATE_TIME DESC
     </select>
 
 </mapper>
