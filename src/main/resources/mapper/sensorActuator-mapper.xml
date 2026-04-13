@@ -31,7 +31,7 @@
         LEFT JOIN DEVICE_ACTUATOR_STANDARD das ON das.CROPS = c.CROP_NAME
         -- 기본값 (default row)
         LEFT JOIN DEVICE_ACTUATOR_STANDARD def ON def.CROPS = 'default'
-        WHERE d.CROP_ID   = git
+        WHERE d.CROP_ID   = #{cropId}
         AND d.IS_ACTIVE = 1
         ORDER BY s.CREATE_DATE DESC
         LIMIT 1
