@@ -5,14 +5,139 @@
 <mapper namespace="com.green.namuwiki.dm.mapper.ChatMapper">
 
 
-    <insert id="">
+
+    <!--채팅방 생성 쿼리-->
+    <insert id="createRoom" parameterType="com.green.namuwiki.dm.dto.ChatRoomDTO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO CHAT_ROOM (
             SENDER_EMAIL
             , RECEIVER_EMAIL
         ) VALUES (
-
+            #{senderEmail}
+            , #{receiverEmail}
         )
     </insert>
+
+
+
+
+    <!--채팅방 조회 쿼리-->
+    <select id="findRoom" resultType="com.green.namuwiki.dm.dto.ChatRoomDTO">
+        SELECT
+            ID AS id
+            , SENDER_EMAIL AS senderEmail
+            , RECEIVER_EMAIL AS receiverEmail
+        FROM
+            CHAT_ROOM
+        WHERE
+            (
+                SENDER_EMAIL = #{senderEmail}
+                AND
+                RECEIVER_EMAIL = #{receiverEmail}
+            )
+            OR
+            (
+                SENDER_EMAIL = #{receiverEmail}
+                AND
+                RECEIVER_EMAIL = #{senderEmail}
+            )
+    </select>
+
+
+
+    <!--내 채팅방 목록 조회 쿼리-->
+    <select id="findMyRooms" resultType="com.green.namuwiki.dm.dto.ChatRoomDTO">
+        SELECT
+            CR.ID AS id
+            , CR.SENDER_EMAIL AS senderEmail
+            , CR.RECEIVER_EMAIL AS receiverEmail
+            , MI1.MEM_NICKNAME AS senderNickname
+            , MI2.MEM_NICKNAME AS receiverNickname
+            , MI1.MEM_PROFILE_IMG AS senderProfileImg
+            , MI2.MEM_PROFILE_IMG AS receiverProfileImg
+            , (
+                SELECT
+                    CONTENT
+                FROM
+                    CHAT_MESSAGE
+                WHERE
+                    ROOM_ID = CR.ID
+                ORDER BY
+                    CREATED_AT DESC
+                LIMIT 1
+            ) AS lastMessage
+            , (
+                SELECT
+                    COUNT(*)
+                FROM
+                    CHAT_MESSAGE
+                WHERE
+                    ROOM_ID = CR.ID
+                    AND
+                    SENDER_EMAIL != #{memEmail}
+                    AND
+                    IS_READ = 0
+            ) AS unreadCount
+        FROM
+            CHAT_ROOM CR
+        LEFT JOIN
+            MEM_INFO MI1 ON CR.SENDER_EMAIL = MI1.MEM_EMAIL
+        LEFT JOIN
+            MEM_INFO MI2 ON CR.RECEIVER_EMAIL = MI2.MEM_EMAIL
+        WHERE
+            CR.SENDER_EMAIL = #{memEmail}
+            OR CR.RECEIVER_EMAIL = #{memEmail}
+        ORDER BY
+            CR.CREATED_AT DESC
+
+    </select>
+
+
+    <!--메세지 저장 쿼리-->
+    <insert id="saveMessage" parameterType="com.green.namuwiki.dm.dto.ChatMessageDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO CHAT_MESSAGE (
+            ROOM_ID
+            , SENDER_EMAIL
+            , CONTENT
+        ) VALUES (
+            #{roomId}
+            , #{senderEmail}
+            , #{content}
+        )
+    </insert>
+
+
+    <!--채팅방 메세지 목록 조회 쿼리-->
+    <select id="findMessages" resultType="com.green.namuwiki.dm.dto.ChatMessageDTO">
+        SELECT
+            CM.ID AS id
+            , CM.ROOM_ID AS roomId
+            , CM.SENDER_EMAIL AS senderEmail
+            , MI.MEM_NICKNAME AS senderNickname
+            , CM.CONTENT AS content
+            , CM.CREATED_AT AS createdAt
+            , CM.IS_READ AS isRead
+        FROM
+            CHAT_MESSAGE CM
+        LEFT JOIN
+            MEM_INFO MI ON CM.SENDER_EMAIL = MI.MEM_EMAIL
+        WHERE
+            CM.ROOM_ID = #{roomId}
+        ORDER BY
+            CM.CREATED_AT ASC
+    </select>
+
+
+    <!--메세지 읽음 처리 쿼리-->
+    <update id="readMessages">
+        UPDATE
+            CHAT_MESSAGE
+        SET
+            IS_READ = 1
+        WHERE
+            ROOM_ID = #{roomId}
+            AND SENDER_EMAIL != #{memEmail}
+            AND IS_READ = 0
+    </update>
 
 
 </mapper>
