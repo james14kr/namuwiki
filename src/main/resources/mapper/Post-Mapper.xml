@@ -30,6 +30,7 @@
             , M.MEM_NICKNAME AS memNickname
             , M.MEM_PROFILE_IMG AS memProfileImg
             , P.VIEW_COUNT AS viewCount
+            , (SELECT COUNT(*) FROM COMMENTS C WHERE C.POST_ID = P.ID) AS commentCount
         FROM
             POSTS P
         LEFT JOIN
@@ -50,6 +51,7 @@
             , M.MEM_NICKNAME AS memNickname
             , M.MEM_PROFILE_IMG AS memProfileImg
             , P.VIEW_COUNT AS viewCount
+            , (SELECT COUNT(*) FROM COMMENTS C WHERE C.POST_ID = P.ID) AS commentCount
         FROM
             POSTS P
         LEFT JOIN
@@ -84,6 +86,7 @@
             POSTS
         SET
             VIEW_COUNT = VIEW_COUNT + 1
+            , UPDATED_AT = UPDATED_AT
         WHERE
             ID = #{id}
     </update>

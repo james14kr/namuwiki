@@ -59,5 +59,16 @@ public class DeviceAuthController {
     }
   }
 
-
+  // 미등록 농장주 조회
+  // url: (GET) localhost:8080/authes/un-reg
+  @GetMapping("/un-reg")
+  public ResponseEntity<?> selectUnregFarmer(){
+    try {
+      int resultUnregFarmer = deviceAuthService.selectUnregFarmer();
+      return ResponseEntity.status(HttpStatus.OK).body(resultUnregFarmer);
+    }catch (Exception e){
+      log.error("미등록 농장주 조회 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 }

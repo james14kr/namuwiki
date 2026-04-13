@@ -25,7 +25,8 @@ repositories {
 }
 
 dependencies {
-
+	// DM용 웹소켓 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'

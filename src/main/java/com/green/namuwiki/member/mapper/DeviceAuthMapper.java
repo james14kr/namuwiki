@@ -19,4 +19,7 @@ public interface DeviceAuthMapper {
 
   // 인증번호 가진 농장주 조회하는 쿼리 실행 메서드
   List<DeviceAuthDTO> selectAuthFarmer();
+
+  // 미등록 농장주 조회하는 쿼리 실행 메서드
+  int selectUnregFarmer();
 }
