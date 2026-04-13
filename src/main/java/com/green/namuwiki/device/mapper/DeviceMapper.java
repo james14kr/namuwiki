@@ -21,6 +21,9 @@ public interface DeviceMapper {
   //농장주: 이메일로 기기 목록 조회
   List<DeviceDTO> getDevicesByFarmerEmail(@Param("farmerEmail") String farmerEmail);
 
+  //농장주: 농작물에서 기기 연결 해제
+  void unlinkDeviceByCropId(@Param("cropId") int cropId);
+
   //유효성 검사: 기기 ID 존재 여부 확인
   DeviceDTO findByDeviceId(String deviceId);
 

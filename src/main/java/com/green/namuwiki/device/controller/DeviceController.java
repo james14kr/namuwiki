@@ -46,4 +46,11 @@ public class DeviceController {
     return ResponseEntity.ok(deviceService.getMyDevices(farmerEmail));
   }
 
+  //농장주: 기기 연결 해제
+  @PatchMapping("/unlink")
+  public ResponseEntity<?> unlinkDevice(@RequestParam int cropId){
+    deviceService.unlinkDevice(cropId);
+    return ResponseEntity.ok().build();
+  }
+
 }

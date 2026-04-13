@@ -46,4 +46,9 @@ public class DeviceService {
     return deviceMapper.getDevicesByFarmerEmail(farmerEmail);
   }
 
+  //농장주: 기기 연결 해제
+  public void unlinkDevice(int cropId){
+    deviceMapper.unlinkDeviceByCropId(cropId);
+  }
+
 }

@@ -55,6 +55,16 @@
         ORDER BY D.REGISTERED_AT DESC
     </select>
 
+    <!--농작물에서 기기 연결 해제-->
+    <update id="unlinkDeviceByCropId">
+        UPDATE DEVICE
+        SET CROP_ID = NULL,
+            FARMER_EMAIL = NULL,
+            IS_ACTIVE = 0,
+            REGISTERED_AT = NULL
+        WHERE CROP_ID = #{cropId}
+    </update>
+
     <!--유효성 검사: 기기 ID 존재 여부-->
     <select id="findByDeviceId" parameterType="String">
         SELECT DEVICE_ID AS deviceId,
