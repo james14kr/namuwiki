@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.namuwiki.posts.mapper.PostLikeMapper">
+
+
+    <!--좋아요 추가 쿼리-->
+    <insert id="insertLike" parameterType="com.green.namuwiki.posts.dto.PostLikeRequestDTO">
+        INSERT INTO POST_LIKES (
+            POST_ID
+            , MEM_EMAIL
+        ) VALUES (
+            #{postId}
+            , #{memEmail}
+        )
+    </insert>
+
+    <!--좋아요 삭제 쿼리-->
+    <delete id="deleteLike" parameterType="com.green.namuwiki.posts.dto.PostLikeRequestDTO">
+        DELETE FROM
+            POST_LIKES
+        WHERE
+            POST_ID = #{postId}
+            AND MEM_EMAIL = #{memEmail}
+    </delete>
+
+    <!--좋아요 조회 쿼리-->
+    <select id="countLike" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            POST_LIKES
+        WHERE
+            POST_ID = #{postId}
+    </select>
+
+
+
+    <!--좋아요 확인 쿼리-->
+    <select id="isLiked" resultType="int" parameterType="com.green.namuwiki.posts.dto.PostLikeRequestDTO">
+        SELECT
+            COUNT(*)
+        FROM
+            POST_LIKES
+        WHERE
+            POST_ID = #{postId}
+            AND MEM_EMAIL = #{memEmail}
+    </select>
+
+
+
+
+
+
+
+</mapper>

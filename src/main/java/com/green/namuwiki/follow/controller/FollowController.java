@@ -45,4 +45,10 @@ public class FollowController {
     return ResponseEntity.ok(result);
   }
 
+  /*팔로워 목록 조회*/
+  @GetMapping("/followers")
+  public ResponseEntity<List<FollowDTO>> getFollowerList(@RequestParam String farmerEmail){
+    return ResponseEntity.ok(followService.getFollowerList(farmerEmail));
+  }
+
 }

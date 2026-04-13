@@ -20,5 +20,7 @@ public interface PostMapper {
   // 상세보기에서 게시글 수정 쿼리 실행 메서드
   void updatePost(PostRequestDTO postRequestDTO);
 
+  // 조회수 쿼리 실행 메서드
+  void incrementViewCount(Long id);
 
 }

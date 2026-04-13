@@ -18,7 +18,11 @@ public class PostService {
     postMapper.insert(dto);
   }
 
-  public PostResponseDTO getPost(Long id) { return postMapper.findById(id); }
+  // 상세 조회 + 조회수
+  public PostResponseDTO getPost(Long id) {
+    postMapper.incrementViewCount(id);
+    return postMapper.findById(id);
+  }
 
   public List<PostResponseDTO> getPosts() {
     return postMapper.findAll();
@@ -33,6 +37,7 @@ public class PostService {
   public void updatePost(PostRequestDTO postRequestDTO){
     postMapper.updatePost(postRequestDTO);
   }
+
 
 
 }

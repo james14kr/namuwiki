@@ -29,6 +29,7 @@
             , P.MEM_EMAIL AS memEmail
             , M.MEM_NICKNAME AS memNickname
             , M.MEM_PROFILE_IMG AS memProfileImg
+            , P.VIEW_COUNT AS viewCount
         FROM
             POSTS P
         LEFT JOIN
@@ -48,6 +49,7 @@
             , P.MEM_EMAIL AS memEmail
             , M.MEM_NICKNAME AS memNickname
             , M.MEM_PROFILE_IMG AS memProfileImg
+            , P.VIEW_COUNT AS viewCount
         FROM
             POSTS P
         LEFT JOIN
@@ -59,25 +61,37 @@
     <!--상세보기에서 게시글 삭제 쿼리-->
     <delete id="deleteDetail">
         DELETE FROM
-        POSTS
+            POSTS
         WHERE
-        ID = #{id}
+            ID = #{id}
     </delete>
 
     <!--상세보기에서 게시글 수정 쿼리-->
     <update id="updatePost" parameterType="com.green.namuwiki.posts.dto.PostRequestDTO">
         UPDATE
-        POSTS
+            POSTS
         SET
-        TITLE = #{title}
-        , CONTENT = #{content}
-        , UPDATED_AT = NOW()
+            TITLE = #{title}
+            , CONTENT = #{content}
+            , UPDATED_AT = NOW()
         WHERE
-        ID = #{id}
-
+            ID = #{id}
     </update>
 
-    <!---->
+    <!--조회수 쿼리-->
+    <update id="incrementViewCount">
+        UPDATE
+            POSTS
+        SET
+            VIEW_COUNT = VIEW_COUNT + 1
+        WHERE
+            ID = #{id}
+    </update>
+
+
+
+
+
 
 
 </mapper>
