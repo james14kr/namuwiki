@@ -53,6 +53,16 @@
         ORDER BY CREATE_TIME DESC
     </select>
 
+    <!--관리자페이지 - 미등록 농장주 조회-->
+    <select id="selectUnregFarmer" resultType="int">
+        SELECT COUNT(*)
+        FROM DEVICE_AUTH D
+        WHERE D.AUTH_CODE NOT IN(
+            SELECT M.AUTH_CODE
+            FROM MEM_INFO M
+            WHERE M.AUTH_CODE IS NOT NULL
+        )
+    </select>
 </mapper>
 
 

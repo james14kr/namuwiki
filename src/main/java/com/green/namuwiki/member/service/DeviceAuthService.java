@@ -32,4 +32,10 @@ public class DeviceAuthService {
     return deviceAuthMapper.selectAuthFarmer();
   }
 
+  // 미등록 농장주 조회 기능 실행 메서드
+  public int selectUnregFarmer(){
+    return deviceAuthMapper.selectUnregFarmer();
+  }
+
+
 }
