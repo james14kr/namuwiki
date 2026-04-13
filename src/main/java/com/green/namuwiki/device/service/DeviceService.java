@@ -41,4 +41,9 @@ public class DeviceService {
     deviceMapper.registerDevice(dto);
   }
 
+  //농장주: 이메일로 기긱 목록 조회
+  public List<DeviceDTO> getMyDevices(String farmerEmail){
+    return deviceMapper.getDevicesByFarmerEmail(farmerEmail);
+  }
+
 }

@@ -39,4 +39,11 @@ public class DeviceController {
     return ResponseEntity.ok().build();
   }
 
+  //농장주: 나의 기기 목록 조회
+  //GET /device/my
+  @GetMapping("/my")
+  public ResponseEntity<List<DeviceDTO>> getMyDevices(@RequestParam String farmerEmail){
+    return ResponseEntity.ok(deviceService.getMyDevices(farmerEmail));
+  }
+
 }

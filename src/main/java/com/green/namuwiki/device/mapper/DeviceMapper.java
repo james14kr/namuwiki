@@ -2,6 +2,7 @@ package com.green.namuwiki.device.mapper;
 
 import com.green.namuwiki.device.dto.DeviceDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public interface DeviceMapper {
 
   //농장주: 기기 등록(기기 ID + 농작물 연결)
   void registerDevice(DeviceDTO dto);
+
+  //농장주: 이메일로 기기 목록 조회
+  List<DeviceDTO> getDevicesByFarmerEmail(@Param("farmerEmail") String farmerEmail);
 
   //유효성 검사: 기기 ID 존재 여부 확인
   DeviceDTO findByDeviceId(String deviceId);
