@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class DeviceAuthInfoDTO {
+public class DeviceAuthDTO {
   private int farmId;
   private String authCode;
   private String memName;

@@ -3,8 +3,8 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
-<mapper namespace="com.green.namuwiki.member.mapper.DeviceAuthInfoMapper">
-	<resultMap id="member" type="com.green.namuwiki.member.dto.DeviceAuthInfoDTO">
+<mapper namespace="com.green.namuwiki.member.mapper.DeviceAuthMapper">
+	<resultMap id="deviceAuth" type="com.green.namuwiki.member.dto.DeviceAuthDTO">
         <id column="FARM_ID" property="farmId" />
         <result column="AUTH_CODE" property="authCode" />
         <result column="MEM_NAME" property="memName" />
@@ -43,7 +43,26 @@
         AND MEM_TEL = #{memTel}
     </select>
 
+    <!--인증번호 가진 농장주리스트 조회 쿼리-->
+    <select id="selectAuthFarmer" resultMap="deviceAuth">
+        SELECT MEM_NAME
+            , MEM_TEL
+            , CREATE_TIME
+            , AUTH_CODE
+        FROM DEVICE_AUTH
+        ORDER BY CREATE_TIME DESC
+    </select>
 
+    <!--관리자페이지 - 미등록 농장주 조회-->
+    <select id="selectUnregFarmer" resultType="int">
+        SELECT COUNT(*)
+        FROM DEVICE_AUTH D
+        WHERE D.AUTH_CODE NOT IN(
+            SELECT M.AUTH_CODE
+            FROM MEM_INFO M
+            WHERE M.AUTH_CODE IS NOT NULL
+        )
+    </select>
 </mapper>
 
 

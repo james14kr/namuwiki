@@ -130,5 +130,18 @@ public class MemberController {
     }
   }
 
+  // 선택한 권한에 맞는 데이터만 조회하는 기능 실행 메서드
+  // required = false : 클라이언트가 이 파라미터를 안 보내도 되는지 여부를 설정
+  // required = true가 기본 값(생략하면 이게 적용)
+  // url: (GET) localhost:8080/members/admin
+  @GetMapping("/admin")
+  public ResponseEntity<?> getMemberList(@RequestParam(required = false) String memRole){
+    try {
+      return ResponseEntity.status(HttpStatus.OK).body(memberService.selectMemberList(memRole));
+    }catch (Exception e){
+      log.error("선택한 권한에 맞는 리스트 조회 중 오류 발생", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 
 }
