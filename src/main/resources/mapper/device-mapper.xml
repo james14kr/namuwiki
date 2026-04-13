@@ -50,9 +50,9 @@
             F.FARM_NAME AS farmName
         FROM DEVICE D
         LEFT JOIN CROP C ON D.CROP_ID = C.CROP_ID
-        LEFT JOIN FARM F ON D.FARM_ID = F.FARM_ID
+        LEFT JOIN FARM F ON C.FARM_ID = F.FARM_ID
         WHERE D.FARMER_EMAIL = #{farmerEmail}
-        ORDER BY D.REGIGTERED_AT DESC
+        ORDER BY D.REGISTERED_AT DESC
     </select>
 
     <!--유효성 검사: 기기 ID 존재 여부-->
