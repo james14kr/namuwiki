@@ -13,9 +13,9 @@ import java.util.List;
 public class SensorActuatorService {
   private final SensorActuatorMapper sensorActuatorMapper;
 
-  // 메인피드 목록 조회 기능
-  public List<SensorActuatorDTO> sensorActuator(){
-    return sensorActuatorMapper.sensorActuator();
+  // cropId로 최신 센서 데이터 조회
+  public SensorActuatorDTO getLatestByCropId(int cropId){
+    return sensorActuatorMapper.getLatestByCropId(cropId);
   }
 
 }

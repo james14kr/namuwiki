@@ -5,46 +5,38 @@
 <!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
 <mapper namespace="com.green.namuwiki.sessorActuator.mapper.SensorActuatorMapper">
 
-
-
-    <!--메인피드 목록 조회 쿼리-->
-    <select
-        id="sensorActuator"
-        resultType="com.green.namuwiki.sessorActuator.dto.SensorActuatorDTO">
+    <!--cropId로 연결된 기기의 최신 센서 데이터 조회-->
+    <select id="getLatestByCropId" resultType="SensorActuatorDTO">
         SELECT
-            s.DEVICE_ID,
-            s.CREATE_DATE,
-            s.TEMP_C,
-            s.HUMIDITY,
-            s.SOIL_MOISTURE_VALUE,
-            s.LDR_VALUE,
-            s.FAN_STATUS,
-            s.LED_STATUS,
-            s.PUMP_STATUS,
-            t.CROPS,
-            t.TEMP_MIN,
-            t.TEMP_MAX,
-            t.SOIL_MIN,
-            t.SOIL_MAX,
-            t.LUX_MIN,
-            t.LUX_MAX
-        FROM
-            SENSOR_DATA s
-        LEFT JOIN
-            DEVICE_INFO d
-        ON
-            s.DEVICE_ID = d.DEVICE_ID
-        LEFT JOIN
-            DEVICE_ACTUATOR_STANDARD t
-        ON
-            d.CROPS = t.CROPS
-        WHERE
-            s.ID = (
-                SELECT MAX(ID) FROM SENSOR_DATA WHERE DEVICE_ID = s.DEVICE_ID
-            )
-        ORDER BY
-            s.CREATE_DATE DESC
+        s.DEVICE_ID           AS deviceId,
+        s.CREATE_DATE         AS createDate,
+        s.TEMP_C              AS tempC,
+        s.HUMIDITY            AS humidity,
+        s.SOIL_MOISTURE_VALUE AS soilMoistureValue,
+        s.LDR_VALUE           AS ldrValue,
+        s.FAN_STATUS          AS fanStatus,
+        s.LED_STATUS          AS ledStatus,
+        s.PUMP_STATUS         AS pumpStatus,
+        c.CROP_NAME           AS crops,
+        COALESCE(das.TEMP_MIN, def.TEMP_MIN) AS tempMin,
+        COALESCE(das.TEMP_MAX, def.TEMP_MAX) AS tempMax,
+        COALESCE(das.SOIL_MIN, def.SOIL_MIN) AS soilMin,
+        COALESCE(das.SOIL_MAX, def.SOIL_MAX) AS soilMax,
+        COALESCE(das.LUX_MIN,  def.LUX_MIN)  AS luxMin,
+        COALESCE(das.LUX_MAX,  def.LUX_MAX)  AS luxMax
+        FROM SENSOR_DATA s
+        JOIN DEVICE d   ON s.DEVICE_ID = d.DEVICE_ID
+        JOIN CROP   c   ON d.CROP_ID   = c.CROP_ID
+        -- 농작물명과 일치하는 기준값 (없으면 null)
+        LEFT JOIN DEVICE_ACTUATOR_STANDARD das ON das.CROPS = c.CROP_NAME
+        -- 기본값 (default row)
+        LEFT JOIN DEVICE_ACTUATOR_STANDARD def ON def.CROPS = 'default'
+        WHERE d.CROP_ID   = git
+        AND d.IS_ACTIVE = 1
+        ORDER BY s.CREATE_DATE DESC
+        LIMIT 1
     </select>
+
 
 
 
