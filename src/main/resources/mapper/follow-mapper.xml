@@ -19,8 +19,9 @@
 
     <!--팔로우 목록 조회(농장주 닉네임 포함)-->
     <select id="getFollowList" resultType="com.green.namuwiki.follow.dto.FollowDTO">
-        SELECT F.FARMER_EMAIL AS farmerEmail
-            ,M.MEM_NICKNAME AS farmerNickname
+        SELECT F.FARMER_EMAIL AS farmerEmail,
+            M.MEM_NICKNAME AS farmerNickname,
+            M.MEM_ROLE AS farmerRole
         FROM FOLLOW F
         JOIN MEM_INFO M ON F.FARMER_EMAIL = M.MEM_EMAIL
         WHERE F.FOLLOWER_EMAIL = #{followerEmail}
