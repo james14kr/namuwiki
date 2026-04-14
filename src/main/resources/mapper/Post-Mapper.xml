@@ -104,6 +104,7 @@
             , P.MEM_EMAIL AS memEmail
             , MI.MEM_NICKNAME AS memNickname
             , MI.MEM_PROFILE_IMG AS memProfileImg
+            , MI.MEM_ROLE AS memRole
             , P.VIEW_COUNT AS viewCount
             , (
                 SELECT

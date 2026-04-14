@@ -75,6 +75,7 @@
             , C.CREATED_AT AS createdAt
             , C.UPDATED_AT AS updatedAt
             , MI.MEM_PROFILE_IMG AS memProfileImg
+            , MI.MEM_ROLE AS memRole
             , P.TITLE AS postTitle
             , PI.MEM_NICKNAME AS postWriterNickname
         FROM
