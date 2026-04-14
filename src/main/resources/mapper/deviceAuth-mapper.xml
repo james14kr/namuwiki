@@ -56,6 +56,7 @@
             , MEM_TEL
             , CREATE_TIME
             , AUTH_CODE
+            , IS_USED
         FROM DEVICE_AUTH
         ORDER BY CREATE_TIME DESC
     </select>
