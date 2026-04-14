@@ -29,6 +29,8 @@ public class MemberService {
         // 잘못 입력된 데이터를 새로운 객체로 생성해 controller의 catch Exception에 던진다.
         throw new IllegalArgumentException("인증번호가 올바르지 않습니다.");
       }
+      // 인증번호 검사 통과 후 IS_USED = 'Y'로 변경
+      deviceAuthMapper.updatedAuthCodeUsed(memberDTO.getAuthCode());
     }
     memberMapper.joinData(memberDTO);
   }
