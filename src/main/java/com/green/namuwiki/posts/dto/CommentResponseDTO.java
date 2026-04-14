@@ -21,4 +21,5 @@ public class CommentResponseDTO {
   private LocalDateTime updatedAt;
   private String memProfileImg;
   private String postTitle;
+  private String postWriterNickname;
 }

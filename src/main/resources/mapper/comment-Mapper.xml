@@ -32,6 +32,7 @@
             , C.UPDATED_AT AS updatedAt
             , M.MEM_PROFILE_IMG AS memProfileImg
             , NULL AS postTitle
+            , NULL AS postWriterNickname
         FROM
             COMMENTS C
         LEFT JOIN
@@ -72,7 +73,9 @@
             , C.CONTENT AS content
             , C.CREATED_AT AS createdAt
             , C.UPDATED_AT AS updatedAt
+            , MI.MEM_PROFILE_IMG AS memProfileImg
             , P.TITLE AS postTitle
+            , PI.MEM_NICKNAME AS postWriterNickname
         FROM
             COMMENTS C
         LEFT JOIN
@@ -83,10 +86,22 @@
             POSTS P
         ON
             C.POST_ID = P.ID
+        LEFT JOIN
+            MEM_INFO PI
+        ON
+            P.MEM_EMAIL = PI.MEM_EMAIL
         WHERE
             C.MEM_EMAIL = #{memEmail}
         ORDER BY
-            C.CREATED_AT DESC
+            (SELECT
+                MAX(CREATED_AT)
+            FROM
+                COMMENTS
+            WHERE
+                POST_ID = C.POST_ID
+                AND
+                MEM_EMAIL = #{memEmail}) DESC
+                , C.CREATED_AT DESC
     </select>
 
 
