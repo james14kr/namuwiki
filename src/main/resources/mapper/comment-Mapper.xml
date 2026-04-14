@@ -31,6 +31,7 @@
             , C.CREATED_AT AS createdAt
             , C.UPDATED_AT AS updatedAt
             , M.MEM_PROFILE_IMG AS memProfileImg
+            , M.MEM_ROLE AS memRole
         FROM
             COMMENTS C
         LEFT JOIN

@@ -29,6 +29,7 @@
             , P.MEM_EMAIL AS memEmail
             , M.MEM_NICKNAME AS memNickname
             , M.MEM_PROFILE_IMG AS memProfileImg
+            , M.MEM_ROLE AS memRole
             , P.VIEW_COUNT AS viewCount
             , (SELECT COUNT(*) FROM COMMENTS C WHERE C.POST_ID = P.ID) AS commentCount
         FROM

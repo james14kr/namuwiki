@@ -20,4 +20,5 @@ public class CommentResponseDTO {
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private String memProfileImg;
+  private String memRole;
 }
