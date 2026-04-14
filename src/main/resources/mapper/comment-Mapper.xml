@@ -32,6 +32,8 @@
             , C.UPDATED_AT AS updatedAt
             , M.MEM_PROFILE_IMG AS memProfileImg
             , M.MEM_ROLE AS memRole
+            , NULL AS postTitle
+            , NULL AS postWriterNickname
         FROM
             COMMENTS C
         LEFT JOIN
@@ -60,6 +62,48 @@
         WHERE
             ID = #{id}
     </delete>
+
+
+    <!--내가 작성한 댓글 조회 쿼리-->
+    <select id="findByMemEmail" resultType="com.green.namuwiki.posts.dto.CommentResponseDTO">
+        SELECT
+            C.ID AS id
+            , C.POST_ID AS postId
+            , C.MEM_EMAIL AS memEmail
+            , MI.MEM_NICKNAME AS memNickname
+            , C.CONTENT AS content
+            , C.CREATED_AT AS createdAt
+            , C.UPDATED_AT AS updatedAt
+            , MI.MEM_PROFILE_IMG AS memProfileImg
+            , P.TITLE AS postTitle
+            , PI.MEM_NICKNAME AS postWriterNickname
+        FROM
+            COMMENTS C
+        LEFT JOIN
+            MEM_INFO MI
+        ON
+            C.MEM_EMAIL = MI.MEM_EMAIL
+        LEFT JOIN
+            POSTS P
+        ON
+            C.POST_ID = P.ID
+        LEFT JOIN
+            MEM_INFO PI
+        ON
+            P.MEM_EMAIL = PI.MEM_EMAIL
+        WHERE
+            C.MEM_EMAIL = #{memEmail}
+        ORDER BY
+            (SELECT
+                MAX(CREATED_AT)
+            FROM
+                COMMENTS
+            WHERE
+                POST_ID = C.POST_ID
+                AND
+                MEM_EMAIL = #{memEmail}) DESC
+                , C.CREATED_AT DESC
+    </select>
 
 
 </mapper>

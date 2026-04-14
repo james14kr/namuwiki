@@ -23,4 +23,9 @@ public interface PostMapper {
   // 조회수 쿼리 실행 메서드
   void incrementViewCount(Long id);
 
+  // 내가 작성한 게시글 조회 쿼리 실행 메서드
+  List<PostResponseDTO> findByMemEmail(String memEmail);
+
+
+
 }
