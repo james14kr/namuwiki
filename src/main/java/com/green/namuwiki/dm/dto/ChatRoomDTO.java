@@ -19,7 +19,7 @@ public class ChatRoomDTO {
   private String senderProfileImg;
   private String receiverProfileImg;
   private String lastMessage;
-  private LocalDateTime createdAT;
+  private LocalDateTime createdAt;
   private int unreadCount;
 
 
