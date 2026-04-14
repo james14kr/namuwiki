@@ -31,6 +31,7 @@
             , C.CREATED_AT AS createdAt
             , C.UPDATED_AT AS updatedAt
             , M.MEM_PROFILE_IMG AS memProfileImg
+            , NULL AS postTitle
         FROM
             COMMENTS C
         LEFT JOIN
@@ -59,6 +60,34 @@
         WHERE
             ID = #{id}
     </delete>
+
+
+    <!--내가 작성한 댓글 조회 쿼리-->
+    <select id="findByMemEmail" resultType="com.green.namuwiki.posts.dto.CommentResponseDTO">
+        SELECT
+            C.ID AS id
+            , C.POST_ID AS postId
+            , C.MEM_EMAIL AS memEmail
+            , MI.MEM_NICKNAME AS memNickname
+            , C.CONTENT AS content
+            , C.CREATED_AT AS createdAt
+            , C.UPDATED_AT AS updatedAt
+            , P.TITLE AS postTitle
+        FROM
+            COMMENTS C
+        LEFT JOIN
+            MEM_INFO MI
+        ON
+            C.MEM_EMAIL = MI.MEM_EMAIL
+        LEFT JOIN
+            POSTS P
+        ON
+            C.POST_ID = P.ID
+        WHERE
+            C.MEM_EMAIL = #{memEmail}
+        ORDER BY
+            C.CREATED_AT DESC
+    </select>
 
 
 </mapper>

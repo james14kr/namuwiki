@@ -21,4 +21,8 @@ public interface CommentMapper {
   // 댓글 삭제 쿼리 실행 메서드
   void deleteComment(Long id);
 
+  // 내가 작성한 댓글 조회 쿼리 실행 메서드
+  List<CommentResponseDTO> findByMemEmail(String memEmail);
+
+
 }
