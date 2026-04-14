@@ -29,6 +29,7 @@
             , P.MEM_EMAIL AS memEmail
             , M.MEM_NICKNAME AS memNickname
             , M.MEM_PROFILE_IMG AS memProfileImg
+            , M.MEM_ROLE AS memRole
             , P.VIEW_COUNT AS viewCount
             , (SELECT COUNT(*) FROM COMMENTS C WHERE C.POST_ID = P.ID) AS commentCount
         FROM
@@ -50,6 +51,7 @@
             , P.MEM_EMAIL AS memEmail
             , M.MEM_NICKNAME AS memNickname
             , M.MEM_PROFILE_IMG AS memProfileImg
+            , M.MEM_ROLE AS memRole
             , P.VIEW_COUNT AS viewCount
             , (SELECT COUNT(*) FROM COMMENTS C WHERE C.POST_ID = P.ID) AS commentCount
         FROM
@@ -90,6 +92,51 @@
         WHERE
             ID = #{id}
     </update>
+
+    <!--내가 작성한 게시글 조회 쿼리-->
+    <select id="findByMemEmail" resultType="com.green.namuwiki.posts.dto.PostResponseDTO">
+        SELECT
+            P.ID AS id
+            , P.TITLE AS title
+            , P.CONTENT AS content
+            , P.CREATED_AT AS createdAt
+            , P.UPDATED_AT AS updatedAt
+            , P.MEM_EMAIL AS memEmail
+            , MI.MEM_NICKNAME AS memNickname
+            , MI.MEM_PROFILE_IMG AS memProfileImg
+            , MI.MEM_ROLE AS memRole
+            , P.VIEW_COUNT AS viewCount
+            , (
+                SELECT
+                    COUNT (*)
+                FROM
+                    COMMENTS C
+                WHERE
+                    C.POST_ID = P.ID
+            ) AS commentCount
+        FROM
+            POSTS P
+        LEFT JOIN
+            MEM_INFO MI
+        ON
+            P.MEM_EMAIL = MI.MEM_EMAIL
+        WHERE
+            P.MEM_EMAIL = #{memEmail}
+        ORDER BY
+            P.CREATED_AT DESC
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
