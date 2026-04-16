@@ -37,8 +37,19 @@
         LIMIT 1
     </select>
 
-
-
+    <!--cropId 기간별 센서 이력 조회(최신 N개, 시간순 정렬)-->
+    <select id="getHistoryByCropId" resultType="SensorHistoryDTO">
+        SELECT S. CREATE_DATE AS createDate,
+            S.TEMP_C AS tempC,
+            S.HUMIDITY AS humidity,
+            S.SOIL_MOISTURE_VALUE AS soilMoistureValue,
+            S.LDR_VALUE AS ldrValue
+        FROM SENSOR_DATA S
+        JOIN DEVICE D ON S.DEVICE_ID = D.DEVICE_ID
+        WHERE D.CROP_ID = #{cropId} AND D.IS_ACTIVE = 1
+        ORDER BY S.CREATE_DATE DESC
+        LIMIT #{limit}
+    </select>
 
 
 </mapper>
