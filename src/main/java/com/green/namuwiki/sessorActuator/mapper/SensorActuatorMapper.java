@@ -13,6 +13,6 @@ public interface SensorActuatorMapper {
   // cropId로 최신 센서 데이터 1건 조회
   SensorActuatorDTO getLatestByCropId(@Param("cropId") int cropId);
 
-  List<SensorHistoryDTO> getHistoryByCropId(@Param("cropId") int cropId, @Param("limit") int limit);
+  List<SensorHistoryDTO> getHistoryByCropId(@Param("cropId") int cropId, @Param("limit") int limit, @Param("startDate") String startDate);
 
 }

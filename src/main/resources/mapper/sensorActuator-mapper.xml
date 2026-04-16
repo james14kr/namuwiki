@@ -47,6 +47,9 @@
         FROM SENSOR_DATA S
         JOIN DEVICE D ON S.DEVICE_ID = D.DEVICE_ID
         WHERE D.CROP_ID = #{cropId} AND D.IS_ACTIVE = 1
+        <if test="startDate != null and startDate != ''">
+            AND S.CREATE_DATE &gt;= #{startDate}
+        </if>
         ORDER BY S.CREATE_DATE DESC
         LIMIT #{limit}
     </select>

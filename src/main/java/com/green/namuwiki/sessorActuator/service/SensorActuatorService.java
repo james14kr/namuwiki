@@ -19,8 +19,8 @@ public class SensorActuatorService {
     return sensorActuatorMapper.getLatestByCropId(cropId);
   }
 
-  public List<SensorHistoryDTO> getHistoryByCropId(int cropId, int limit){
-    return sensorActuatorMapper.getHistoryByCropId(cropId, limit);
+  public List<SensorHistoryDTO> getHistoryByCropId(int cropId, int limit, String startDate){
+    return sensorActuatorMapper.getHistoryByCropId(cropId, limit, startDate);
   }
 
 }

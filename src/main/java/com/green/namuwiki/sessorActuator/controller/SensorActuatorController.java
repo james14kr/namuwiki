@@ -34,8 +34,11 @@ public class SensorActuatorController {
   }
 
   @GetMapping("/history/crop")
-  public ResponseEntity<List<SensorHistoryDTO>> getLatestByCropId(@RequestParam int cropId, @RequestParam(defaultValue = "20") int limit){
-    List<SensorHistoryDTO> data = sensorActuatorService.getHistoryByCropId(cropId, limit);
+  public ResponseEntity<List<SensorHistoryDTO>> getHistoryByCropId(
+      @RequestParam int cropId,
+      @RequestParam(defaultValue = "20") int limit,
+      @RequestParam(required = false) String startDate) {
+    List<SensorHistoryDTO> data = sensorActuatorService.getHistoryByCropId(cropId, limit, startDate);
     return ResponseEntity.ok(data);
   }
 
