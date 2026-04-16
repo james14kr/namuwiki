@@ -38,8 +38,8 @@
     </select>
 
     <!--cropId 기간별 센서 이력 조회(최신 N개, 시간순 정렬)-->
-    <select id="getHistoryByCropId" resultType="SensorHistoryDTO">
-        SELECT S. CREATE_DATE AS createDate,
+    <select id="getHistoryByCropId" resultType="com.green.namuwiki.sessorActuator.dto.SensorHistoryDTO">
+        SELECT S.CREATE_DATE AS createDate,
             S.TEMP_C AS tempC,
             S.HUMIDITY AS humidity,
             S.SOIL_MOISTURE_VALUE AS soilMoistureValue,
