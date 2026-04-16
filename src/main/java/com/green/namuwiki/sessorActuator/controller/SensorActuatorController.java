@@ -2,6 +2,7 @@ package com.green.namuwiki.sessorActuator.controller;
 
 
 import com.green.namuwiki.sessorActuator.dto.SensorActuatorDTO;
+import com.green.namuwiki.sessorActuator.dto.SensorHistoryDTO;
 import com.green.namuwiki.sessorActuator.service.SensorActuatorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,14 @@ public class SensorActuatorController {
     return ResponseEntity.ok(data);
   }
 
-
+  @GetMapping("/history/crop")
+  public ResponseEntity<List<SensorHistoryDTO>> getHistoryByCropId(
+      @RequestParam int cropId,
+      @RequestParam(defaultValue = "20") int limit,
+      @RequestParam(required = false) String startDate) {
+    List<SensorHistoryDTO> data = sensorActuatorService.getHistoryByCropId(cropId, limit, startDate);
+    return ResponseEntity.ok(data);
+  }
 
 
 }
