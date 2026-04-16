@@ -116,6 +116,7 @@
             , CM.CONTENT AS content
             , CM.CREATED_AT AS createdAt
             , CM.IS_READ AS isRead
+            , MI.MEM_PROFILE_IMG AS senderProfileImg
         FROM
             CHAT_MESSAGE CM
         LEFT JOIN
