@@ -57,7 +57,7 @@ public class SecurityConfig {
             )
             // ★ 인증 및 인가에 대한 접근 설정 ★
             .authorizeHttpRequests(auth ->
-                    auth.requestMatchers("/ws/**").permitAll() // WebSocket 경로 허용 (dm 관련)
+                    auth.requestMatchers("/ws/**", "/ws/info").permitAll() // WebSocket 경로 허용 (dm 관련)
                     .anyRequest().permitAll() // 인증 및 인가를 받지 않아도 모든 곳에 접근 가능!!!
             );
     // 기존 로그인 처리를 담당하는 UsernamePasswordAuthenticationFilter를 우리가 만든 LoginFilter클래스로 대체
@@ -76,6 +76,8 @@ public class SecurityConfig {
     config.setAllowCredentials(true); //쿠키 정보를 통신하기 위한 설정
     config.addAllowedOrigin("http://localhost:5173"); //리액트에서의 요청 허용
     config.addAllowedOrigin("http://localhost:8080"); //dm 관련 요청 허용
+    config.addAllowedOrigin("http://192.168.30.77:5173");
+    config.addAllowedOrigin("http://192.168.30.109:5173");
     config.addAllowedHeader("*"); //모든 헤더 정보 허용
     config.addAllowedMethod("*"); //get, post, delete, put 등의 요청 메서드 허용
 
