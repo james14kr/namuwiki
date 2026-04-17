@@ -89,10 +89,14 @@ public class ChatController {
     // @payload : rest api의 @RequestBody같은 역할,
     //            보낸 메세지 내용 ChatMessageDTO로 받아옴
     try {
-      chatService.saveMessage(chatMessageDTO);
       // 받은 메세지를 DB에 저장(그래야 나중에 채팅방 들어와도 이전 메세지 있음)
+      chatService.saveMessage(chatMessageDTO);
 
-      simpMessagingTemplate.convertAndSend("/sub/dm/room/"+chatMessageDTO.getRoomId(), chatMessageDTO);
+      // 저장된 메시지 목록에서 마지막 메시지 가져오기 (닉네임, 프로필 포함)
+      List<ChatMessageDTO> messages = chatService.getMessage(chatMessageDTO.getRoomId());
+      ChatMessageDTO enriched = messages.get(messages.size() - 1);
+
+      simpMessagingTemplate.convertAndSend("/sub/dm/room/"+chatMessageDTO.getRoomId(), enriched);
       // /sub/dm/room/1 (채팅방) 경로를 구독중인 클라이언트한테 메세지 전송
       // user1, user2 둘다 /sub/dm/room/1 구독중이면 둘다 실시간으로 메세지 받음
     }catch (Exception e){
