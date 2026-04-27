@@ -20,4 +20,6 @@ public class FarmDTO {
   private String memTel;
   private String memProfileImg;
 
+  private String farmImg;
+
 }

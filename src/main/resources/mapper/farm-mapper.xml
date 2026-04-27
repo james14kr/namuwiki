@@ -7,8 +7,8 @@
 
     <!--농장 등록-->
     <insert id="insertFarm">
-        INSERT INTO FARM(FARMER_EMAIL, FARM_NAME, FARM_ADDR, FARM_DESC)
-        VALUES(#{farmerEmail},#{farmName},#{farmAddr},#{farmDesc} )
+        INSERT INTO FARM(FARMER_EMAIL, FARM_NAME, FARM_ADDR, FARM_DESC, FARM_IMG)
+        VALUES(#{farmerEmail},#{farmName},#{farmAddr},#{farmDesc}, #{farmImg} )
     </insert>
 
     <!--농장 목록-->
@@ -18,6 +18,7 @@
             ,FARM_NAME
             ,FARM_ADDR
             ,FARM_DESC
+            ,FARM_IMG
             ,CREATED_DATE
         FROM FARM
         ORDER BY CREATED_DATE DESC
@@ -25,7 +26,7 @@
 
     <!--팔로우 한 농장 -->
     <select id="selectFarmById" parameterType="int" resultType="com.green.namuwiki.farm.dto.FarmDTO">
-        SELECT F.FARM_ID, F.FARMER_EMAIL, F.FARM_NAME, F.FARM_ADDR, F.FARM_DESC,
+        SELECT F.FARM_ID, F.FARMER_EMAIL, F.FARM_NAME, F.FARM_ADDR, F.FARM_DESC, F.FARM_IMG,
             M.MEM_NAME, M.MEM_NICKNAME, M.MEM_TEL, M.MEM_PROFILE_IMG
         FROM FARM F
         JOIN MEM_INFO M ON F.FARMER_EMAIL = M.MEM_EMAIL
@@ -34,7 +35,7 @@
 
     <!--농장주가 등록한 농장 목록-->
     <select id="selectFarmsByEmail" parameterType="String" resultType="com.green.namuwiki.farm.dto.FarmDTO">
-        SELECT FARM_ID, FARMER_EMAIL, FARM_NAME, FARM_ADDR, FARM_DESC, CREATED_DATE
+        SELECT FARM_ID, FARMER_EMAIL, FARM_NAME, FARM_ADDR, FARM_DESC, FARM_IMG, CREATED_DATE
         FROM FARM
         WHERE FARMER_EMAIL = #{farmerEmail}
         ORDER BY CREATED_DATE DESC
