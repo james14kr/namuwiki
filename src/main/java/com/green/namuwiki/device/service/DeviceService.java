@@ -1,5 +1,6 @@
 package com.green.namuwiki.device.service;
 
+import com.green.namuwiki.device.dto.DeviceControlDTO;
 import com.green.namuwiki.device.dto.DeviceDTO;
 import com.green.namuwiki.device.mapper.DeviceMapper;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +50,11 @@ public class DeviceService {
   //농장주: 기기 연결 해제
   public void unlinkDevice(int cropId){
     deviceMapper.unlinkDeviceByCropId(cropId);
+  }
+
+  //수동 제어 override 업데이트
+  public void updateDeviceControl(DeviceControlDTO dto){
+    deviceMapper.updateDeviceControl(dto);
   }
 
 }

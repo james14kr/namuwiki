@@ -3,16 +3,14 @@ package com.green.namuwiki.sessorActuator.controller;
 
 import com.green.namuwiki.sessorActuator.dto.SensorActuatorDTO;
 import com.green.namuwiki.sessorActuator.dto.SensorHistoryDTO;
+import com.green.namuwiki.sessorActuator.dto.ThresholdUpdateDTO;
 import com.green.namuwiki.sessorActuator.service.SensorActuatorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,6 +39,14 @@ public class SensorActuatorController {
     List<SensorHistoryDTO> data = sensorActuatorService.getHistoryByCropId(cropId, limit, startDate);
     return ResponseEntity.ok(data);
   }
+
+  //임계값 수정
+  @PatchMapping("/threshold")
+  public ResponseEntity<?> updateThreshold(@RequestBody ThresholdUpdateDTO dto){
+    sensorActuatorService.updateThreshold(dto);
+    return ResponseEntity.ok().build();
+  }
+
 
 
 }

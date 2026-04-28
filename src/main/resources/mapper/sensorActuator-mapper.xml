@@ -23,7 +23,9 @@
         COALESCE(das.SOIL_MIN, def.SOIL_MIN) AS soilMin,
         COALESCE(das.SOIL_MAX, def.SOIL_MAX) AS soilMax,
         COALESCE(das.LUX_MIN,  def.LUX_MIN)  AS luxMin,
-        COALESCE(das.LUX_MAX,  def.LUX_MAX)  AS luxMax
+        COALESCE(das.LUX_MAX,  def.LUX_MAX)  AS luxMax,
+        COALESCE(das.HUMIDITY_MIN, def.HUMIDITY_MIN) AS humidityMin,
+        COALESCE(das.HUMIDITY_MAX, def.HUMIDITY_MAX) AS humidityMax,
         FROM SENSOR_DATA s
         JOIN DEVICE d   ON s.DEVICE_ID = d.DEVICE_ID
         JOIN CROP   c   ON d.CROP_ID   = c.CROP_ID
@@ -53,6 +55,21 @@
         ORDER BY S.CREATE_DATE DESC
         LIMIT #{limit}
     </select>
+
+    <!--임계값 수정-->
+    <update id="updateThreshold" parameterType="com.green.namuwiki.sessorActuator.dto.ThresholdUpdateDTO">
+        UPDATE DEVICE_ACTUATOR_STANDARD
+        SET TEMP_MIN = #{tempMin},
+            TEMP_MAX = #{tempMax},
+            HUMIDITY_MIN = #{humidityMin},
+            HUMIDITY_MAX = #{humidityMax},
+            SOIL_MIN = #{soilMin},
+            SOIL_MAX = #{soilMax},
+            LUX_MIN = #{luxMin},
+            LUX_MAX = #{luxMax}
+        WHERE CROPS = #{crops}
+
+    </update>
 
 
 </mapper>

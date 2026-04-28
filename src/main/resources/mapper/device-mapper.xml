@@ -73,6 +73,14 @@
         WHERE DEVICE_ID = #{deviceId}
     </select>
 
+    <!--수동 제어 override 업데이트-->
+    <update id="updateDeviceControl" parameterType="com.green.namuwiki.device.dto.DeviceControlDTO">
+        UPDATE DEVICE
+        SET FAN_OVERRIDE = #{fanOverride},
+            LED_OVERRIDE = #{ledOverride},
+            PUMP_OVERRIDE = #{pumpOverride}
+        WHERE DEVICE_ID = #{deviceId}
+    </update>
 
 </mapper>
 

@@ -24,4 +24,6 @@ public class SensorActuatorDTO {
   private double soilMax;            // 토양수분 최댓값 (임계값)
   private double luxMin;             // 조도 최솟값 (임계값)
   private double luxMax;             // 조도 최댓값 (임계값)
+  private double humidityMin;
+  private double humidityMax;
 }

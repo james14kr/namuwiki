@@ -1,5 +1,6 @@
 package com.green.namuwiki.device.controller;
 
+import com.green.namuwiki.device.dto.DeviceControlDTO;
 import com.green.namuwiki.device.dto.DeviceDTO;
 import com.green.namuwiki.device.service.DeviceService;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,13 @@ public class DeviceController {
   @PatchMapping("/unlink")
   public ResponseEntity<?> unlinkDevice(@RequestParam int cropId){
     deviceService.unlinkDevice(cropId);
+    return ResponseEntity.ok().build();
+  }
+
+  //수동 제어
+  @PatchMapping("/control")
+  public ResponseEntity<?> updateDeviceControl(@RequestBody DeviceControlDTO dto){
+    deviceService.updateDeviceControl(dto);
     return ResponseEntity.ok().build();
   }
 

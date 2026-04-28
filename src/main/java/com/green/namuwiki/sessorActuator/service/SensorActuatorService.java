@@ -3,6 +3,7 @@ package com.green.namuwiki.sessorActuator.service;
 
 import com.green.namuwiki.sessorActuator.dto.SensorActuatorDTO;
 import com.green.namuwiki.sessorActuator.dto.SensorHistoryDTO;
+import com.green.namuwiki.sessorActuator.dto.ThresholdUpdateDTO;
 import com.green.namuwiki.sessorActuator.mapper.SensorActuatorMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,11 @@ public class SensorActuatorService {
 
   public List<SensorHistoryDTO> getHistoryByCropId(int cropId, int limit, String startDate){
     return sensorActuatorMapper.getHistoryByCropId(cropId, limit, startDate);
+  }
+
+  //임계값 수정
+  public void updateThreshold(ThresholdUpdateDTO dto){
+    sensorActuatorMapper.updateThreshold(dto);
   }
 
 }

@@ -1,5 +1,6 @@
 package com.green.namuwiki.device.mapper;
 
+import com.green.namuwiki.device.dto.DeviceControlDTO;
 import com.green.namuwiki.device.dto.DeviceDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,5 +27,8 @@ public interface DeviceMapper {
 
   //유효성 검사: 기기 ID 존재 여부 확인
   DeviceDTO findByDeviceId(String deviceId);
+
+  //수동 제어 override 업데이트
+  void updateDeviceControl(DeviceControlDTO dto);
 
 }

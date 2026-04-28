@@ -3,6 +3,7 @@ package com.green.namuwiki.sessorActuator.mapper;
 
 import com.green.namuwiki.sessorActuator.dto.SensorActuatorDTO;
 import com.green.namuwiki.sessorActuator.dto.SensorHistoryDTO;
+import com.green.namuwiki.sessorActuator.dto.ThresholdUpdateDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,5 +15,8 @@ public interface SensorActuatorMapper {
   SensorActuatorDTO getLatestByCropId(@Param("cropId") int cropId);
 
   List<SensorHistoryDTO> getHistoryByCropId(@Param("cropId") int cropId, @Param("limit") int limit, @Param("startDate") String startDate);
+
+  //임계값 수정
+  void updateThreshold(ThresholdUpdateDTO dto);
 
 }
