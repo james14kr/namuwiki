@@ -14,5 +14,6 @@ public class CropDTO {
   private String cropName;
   private String cropDesc;
   private int cropPrice;
+  private String cropImg;
 
 }

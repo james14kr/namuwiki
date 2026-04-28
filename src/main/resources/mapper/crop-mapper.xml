@@ -11,12 +11,14 @@
             CROP_NAME
             ,CROP_DESC
             ,CROP_PRICE
+            ,CROP_IMG
         )
         VALUES(
             #{farmId},
             #{cropName},
             #{cropDesc},
-            #{cropPrice}
+            #{cropPrice},
+            #{cropImg}
         )
     </insert>
 
@@ -27,6 +29,7 @@
             ,CROP_NAME AS cropName
             ,CROP_DESC AS cropDesc
             ,CROP_PRICE AS cropPrice
+            ,CROP_IMG AS cropImg
         FROM CROP
         WHERE FARM_ID = #{farmId}
     </select>
@@ -49,7 +52,8 @@
             C.FARM_ID AS farmId,
             C.CROP_NAME AS cropName,
             C.CROP_DESC AS cropDesc,
-            C.CROP_PRICE AS cropPrice
+            C.CROP_PRICE AS cropPrice,
+            C.CROP_IMG AS cropImg
         FROM CROP C
         JOIN FARM F ON C.FARM_ID = F.FARM_ID
         WHERE F.FARMER_EMAIL = #{farmerEmail}
