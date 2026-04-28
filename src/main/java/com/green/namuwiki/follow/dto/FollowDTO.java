@@ -14,4 +14,5 @@ public class FollowDTO {
   private String farmerNickname;
   private String followerNickname;
   private String farmerRole;
+  private String farmerProfileImg;
 }
