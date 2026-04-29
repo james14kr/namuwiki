@@ -25,7 +25,7 @@
         COALESCE(das.LUX_MIN,  def.LUX_MIN)  AS luxMin,
         COALESCE(das.LUX_MAX,  def.LUX_MAX)  AS luxMax,
         COALESCE(das.HUMIDITY_MIN, def.HUMIDITY_MIN) AS humidityMin,
-        COALESCE(das.HUMIDITY_MAX, def.HUMIDITY_MAX) AS humidityMax,
+        COALESCE(das.HUMIDITY_MAX, def.HUMIDITY_MAX) AS humidityMax
         FROM SENSOR_DATA s
         JOIN DEVICE d   ON s.DEVICE_ID = d.DEVICE_ID
         JOIN CROP   c   ON d.CROP_ID   = c.CROP_ID

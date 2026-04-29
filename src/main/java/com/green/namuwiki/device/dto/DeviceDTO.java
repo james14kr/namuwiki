@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class DeviceDTO {
   private String deviceId;
-  private int cropId;
+  private Integer cropId;
   private String farmerEmail;
   private int isActive;
   private String registeredAt;
@@ -17,4 +17,9 @@ public class DeviceDTO {
 
   private String cropName;
   private String farmName;
+
+  private Integer fanOverride;
+  private Integer ledOverride;
+  private Integer pumpOverride;
+
 }

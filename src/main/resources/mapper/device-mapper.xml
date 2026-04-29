@@ -46,6 +46,9 @@
             D.IS_ACTIVE AS isActive,
             D.REGISTERED_AT AS registeredAT,
             D.CREATED_AT AS createdAt,
+            D.FAN_OVERRIDE AS fanOverride,
+            D.LED_OVERRIDE AS ledOverride,
+            D.PUMP_OVERRIDE AS pumpOverride,
             C.CROP_NAME AS cropName,
             F.FARM_NAME AS farmName
         FROM DEVICE D
