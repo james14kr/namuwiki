@@ -21,7 +21,8 @@
     <select id="getFollowList" resultType="com.green.namuwiki.follow.dto.FollowDTO">
         SELECT F.FARMER_EMAIL AS farmerEmail,
             M.MEM_NICKNAME AS farmerNickname,
-            M.MEM_ROLE AS farmerRole
+            M.MEM_ROLE AS farmerRole,
+            M.MEM_PROFILE_IMG AS farmerProfileImg
         FROM FOLLOW F
         JOIN MEM_INFO M ON F.FARMER_EMAIL = M.MEM_EMAIL
         WHERE F.FOLLOWER_EMAIL = #{followerEmail}

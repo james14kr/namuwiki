@@ -81,6 +81,9 @@ public class SecurityConfig {
     config.addAllowedOrigin("http://192.168.30.77:5173");
     config.addAllowedOrigin("http://192.168.30.109:5173");
     config.addAllowedOrigin("http://192.168.30.116:5173");
+
+    config.setAllowedOriginPatterns(List.of("*"));
+
     config.addAllowedHeader("*"); //모든 헤더 정보 허용
     config.addAllowedMethod("*"); //get, post, delete, put 등의 요청 메서드 허용
 
