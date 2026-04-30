@@ -22,4 +22,7 @@ public interface DeviceAuthMapper {
 
   // 미등록 농장주 조회하는 쿼리 실행 메서드
   int selectUnregFarmer();
+
+  // IS_USED 'Y'로 업데이트
+  void updatedAuthCodeUsed(String authCode);
 }

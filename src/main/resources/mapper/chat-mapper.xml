@@ -140,5 +140,11 @@
             AND IS_READ = 0
     </update>
 
+    <select id="getMemberInfo" resultType="com.green.namuwiki.dm.dto.ChatMessageDTO">
+        SELECT MEM_PROFILE_IMG AS senderProfileImg
+            , MEM_NICKNAME AS senderNickname
+        FROM MEM_INFO
+        WHERE MEM_EMAIL = #{senderEmail}
+    </select>
 
 </mapper>

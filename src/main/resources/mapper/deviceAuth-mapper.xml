@@ -31,8 +31,15 @@
         SELECT COUNT(*)
         FROM DEVICE_AUTH
         WHERE AUTH_CODE = #{authCode}
-        AND IS_USED = "N"
+        AND IS_USED = 'N'
     </select>
+
+    <!--IS_USED 'Y'로 업데이트-->
+    <update id="updatedAuthCodeUsed">
+        UPDATE DEVICE_AUTH
+        SET IS_USED = 'Y'
+        WHERE AUTH_CODE = #{authCode}
+    </update>
 
     <!--인증번호 유효성 검사 시 일치여부 판단하는 쿼리 : 있으면 1, 없으면 0-->
     <select id="compareFarmerData" resultType="int">
@@ -49,6 +56,7 @@
             , MEM_TEL
             , CREATE_TIME
             , AUTH_CODE
+            , IS_USED
         FROM DEVICE_AUTH
         ORDER BY CREATE_TIME DESC
     </select>
