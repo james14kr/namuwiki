@@ -28,4 +28,6 @@ public interface ChatMapper {
   // 메세지 읽음 처리 쿼리 실행 메서드
   void readMessages(Long roomId, String memEmail);
 
+  // 프로필 이미지 조회 쿼리 실행 메서드
+  ChatMessageDTO getMemberInfo(String senderEmail);
 }

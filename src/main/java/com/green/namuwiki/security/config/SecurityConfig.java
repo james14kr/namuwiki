@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import java.util.List;
 
 // 인증 및 인가에 대한 설정 내용을 작성하는 클래스
 
@@ -74,10 +75,12 @@ public class SecurityConfig {
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration config = new CorsConfiguration();
     config.setAllowCredentials(true); //쿠키 정보를 통신하기 위한 설정
+    config.setAllowedOriginPatterns(List.of("*"));
     config.addAllowedOrigin("http://localhost:5173"); //리액트에서의 요청 허용
     config.addAllowedOrigin("http://localhost:8080"); //dm 관련 요청 허용
     config.addAllowedOrigin("http://192.168.30.77:5173");
     config.addAllowedOrigin("http://192.168.30.109:5173");
+    config.addAllowedOrigin("http://192.168.30.116:5173");
     config.addAllowedHeader("*"); //모든 헤더 정보 허용
     config.addAllowedMethod("*"); //get, post, delete, put 등의 요청 메서드 허용
 

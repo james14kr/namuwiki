@@ -36,6 +36,13 @@ public class ChatService {
 
   // 메세지 저장
   public void saveMessage(ChatMessageDTO chatMessageDTO){
+    System.out.println("senderEmail:"+ chatMessageDTO.getSenderEmail());
+    ChatMessageDTO memberInfo = chatMapper.getMemberInfo(chatMessageDTO.getSenderEmail());
+    System.out.println("memberInfo : " + memberInfo);
+    if(memberInfo != null){
+      chatMessageDTO.setSenderProfileImg(memberInfo.getSenderProfileImg());
+      chatMessageDTO.setSenderNickname(memberInfo.getSenderNickname());
+    }
     chatMapper.saveMessage(chatMessageDTO);
   }
 
