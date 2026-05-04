@@ -23,4 +23,6 @@ public class PostResponseDTO {
   private String memRole;
   private int viewCount;
   private int commentCount;
+  private String hashtags;
+  private String category;
 }

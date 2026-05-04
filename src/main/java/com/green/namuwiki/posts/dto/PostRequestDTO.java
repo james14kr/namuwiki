@@ -12,4 +12,6 @@ public class PostRequestDTO {
   private String title;
   private String content;
   private String memEmail;
+  private String hashtags;
+  private String category;
 }

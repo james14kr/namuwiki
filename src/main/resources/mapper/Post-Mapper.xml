@@ -11,10 +11,18 @@
             TITLE
             , CONTENT
             , MEM_EMAIL
+            , HASHTAGS
+            , CATEGORY
+            , CREATED_AT
+            , UPDATED_AT
         ) VALUES (
             #{title}
             , #{content}
             , #{memEmail}
+            , #{hashtags}
+            , #{category}
+            , NOW()
+            , NOW()
         )
     </insert>
 
@@ -32,6 +40,8 @@
             , M.MEM_ROLE AS memRole
             , P.VIEW_COUNT AS viewCount
             , (SELECT COUNT(*) FROM COMMENTS C WHERE C.POST_ID = P.ID) AS commentCount
+            , P.HASHTAGS AS hashtags
+            , P.CATEGORY AS category
         FROM
             POSTS P
         LEFT JOIN
@@ -54,6 +64,8 @@
             , M.MEM_ROLE AS memRole
             , P.VIEW_COUNT AS viewCount
             , (SELECT COUNT(*) FROM COMMENTS C WHERE C.POST_ID = P.ID) AS commentCount
+            , P.HASHTAGS AS hashtags
+            , P.CATEGORY AS category
         FROM
             POSTS P
         LEFT JOIN
@@ -106,6 +118,8 @@
             , MI.MEM_PROFILE_IMG AS memProfileImg
             , MI.MEM_ROLE AS memRole
             , P.VIEW_COUNT AS viewCount
+            , P.HASHTAGS AS hashtags
+            , P.CATEGORY AS category
             , (
                 SELECT
                     COUNT (*)
