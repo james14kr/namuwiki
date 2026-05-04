@@ -118,8 +118,6 @@
             , MI.MEM_PROFILE_IMG AS memProfileImg
             , MI.MEM_ROLE AS memRole
             , P.VIEW_COUNT AS viewCount
-            , P.HASHTAGS AS hashtags
-            , P.CATEGORY AS category
             , (
                 SELECT
                     COUNT (*)
@@ -128,6 +126,8 @@
                 WHERE
                     C.POST_ID = P.ID
             ) AS commentCount
+            , P.HASHTAGS AS hashtags
+            , P.CATEGORY AS category
         FROM
             POSTS P
         LEFT JOIN
