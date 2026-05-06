@@ -40,11 +40,18 @@
     <!--농장주: 이메일로 기기 목록 조회-->
     <select id="getDevicesByFarmerEmail" resultType="DeviceDTO">
         SELECT
-            D.DEVICE_ID AS deviceID,
-            D.CROP_ID AS CROp_ID,
+            D.DEVICE_ID AS deviceId,
+            D.CROP_ID AS cropId,
             D.FARMER_EMAIL AS farmerEmail,
-            D.IS_ACTIVE AS isActive,
-            D.REGISTERED_AT AS registeredAT,
+            CASE
+                WHEN EXISTS (
+                    SELECT 1 FROM SENSOR_DATA SD
+                    WHERE SD.DEVICE_ID = D.DEVICE_ID
+                    AND SD.CREATE_DATE >= NOW() - INTERVAL 10 MINUTE
+                ) THEN 1
+                ELSE 0
+            END AS isActive,
+            D.REGISTERED_AT AS registeredAt,
             D.CREATED_AT AS createdAt,
             D.FAN_OVERRIDE AS fanOverride,
             D.LED_OVERRIDE AS ledOverride,
