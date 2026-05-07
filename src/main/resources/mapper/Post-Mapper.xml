@@ -140,21 +140,33 @@
             P.CREATED_AT DESC
     </select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <select id="searchByKeyword" resultType="com.green.namuwiki.posts.dto.PostResponseDTO">
+        SELECT
+            P.ID AS id
+            ,P.TITLE AS title
+            ,P.CONTENT AS content
+            ,P.CREATED_AT AS createdAt
+            ,P.UPDATED_AT AS updatedAt
+            ,P.MEM_EMAIL AS memEmail
+            ,M.MEM_NICKNAME AS memNickname
+            ,M.MEM_PROFILE_IMG AS memProfileImg
+            ,M.MEM_ROLE AS memRole
+            ,P.VIEW_COUNT AS viewCount
+            ,(SELECT COUNT(*) FROM COMMENTS C WHERE C.POST_ID = P.ID) AS commentCount
+            ,P.HASHTAGS AS hashtags
+            ,P.CATEGORY AS category
+        FROM
+            POSTS P
+        LEFT JOIN
+            MEM_INFO M ON P.MEM_EMAIL = M.MEM_EMAIL
+        WHERE
+            P.TITLE LIKE CONCAT('%', #{keyword}, '%')
+            OR P.CONTENT LIKE CONCAT('%', #{keyword}, '%')
+            OR P.HASHTAGS LIKE CONCAT('%', #{keyword}, '%')
+            OR M.MEM_NICKNAME LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY
+            P.CREATED_AT DESC
+    </select>
 
 
 

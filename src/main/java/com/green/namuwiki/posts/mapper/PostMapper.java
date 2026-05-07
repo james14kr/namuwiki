@@ -26,6 +26,7 @@ public interface PostMapper {
   // 내가 작성한 게시글 조회 쿼리 실행 메서드
   List<PostResponseDTO> findByMemEmail(String memEmail);
 
+  List<PostResponseDTO> searchByKeyword(String keyWord);
 
 
 }

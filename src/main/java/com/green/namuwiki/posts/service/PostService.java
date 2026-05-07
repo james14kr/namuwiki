@@ -38,6 +38,9 @@ public class PostService {
     postMapper.updatePost(postRequestDTO);
   }
 
-
+  //키워드로 게시글 검색
+  public List<PostResponseDTO> searchPosts(String keyword){
+    return postMapper.searchByKeyword(keyword);
+  }
 
 }
